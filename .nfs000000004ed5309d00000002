@@ -1,0 +1,301 @@
+ We will perform 16 experiments 
+My outpath is :  ../experiments/MULTI-ENCODECO_0/
+../experiments/MULTI-ENCODECO_0/
+My outpath is :  ../experiments/MULTI-ENCODECO_1/
+../experiments/MULTI-ENCODECO_1/
+My outpath is :  ../experiments/MULTI-ENCODECO_2/
+../experiments/MULTI-ENCODECO_2/
+My outpath is :  ../experiments/MULTI-ENCODECO_3/
+../experiments/MULTI-ENCODECO_3/
+My outpath is :  ../experiments/MULTI-ENCODECO_4/
+../experiments/MULTI-ENCODECO_4/
+My outpath is :  ../experiments/MULTI-ENCODECO_5/
+../experiments/MULTI-ENCODECO_5/
+My outpath is :  ../experiments/MULTI-ENCODECO_6/
+../experiments/MULTI-ENCODECO_6/
+My outpath is :  ../experiments/MULTI-ENCODECO_7/
+../experiments/MULTI-ENCODECO_7/
+My outpath is :  ../experiments/MULTI-ENCODECO_8/
+../experiments/MULTI-ENCODECO_8/
+My outpath is :  ../experiments/MULTI-ENCODECO_9/
+../experiments/MULTI-ENCODECO_9/
+My outpath is :  ../experiments/MULTI-ENCODECO_10/
+../experiments/MULTI-ENCODECO_10/
+My outpath is :  ../experiments/MULTI-ENCODECO_11/
+../experiments/MULTI-ENCODECO_11/
+My outpath is :  ../experiments/MULTI-ENCODECO_12/
+../experiments/MULTI-ENCODECO_12/
+My outpath is :  ../experiments/MULTI-ENCODECO_13/
+../experiments/MULTI-ENCODECO_13/
+My outpath is :  ../experiments/MULTI-ENCODECO_14/
+../experiments/MULTI-ENCODECO_14/
+My outpath is :  ../experiments/MULTI-ENCODECO_15/
+../experiments/MULTI-ENCODECO_15/
+--------------Indices--------------------------------------Indices--------------------------------------Indices--------------------------------------Indices------------------------
+
+
+
+--------------Indices--------------------------------------Indices--------------------------------------Indices--------------------------------------Indices------------------------
+
+
+
+--------------Indices--------------------------------------Indices------------------------
+
+Training set starts at : 0  and ends at:  5833
+Training set starts at :Training set starts at :Training set starts at :   000    and ends at:  and ends at:  and ends at:  Training set starts at :Training set starts at :  Training set starts at :Training set starts at :5833  58335833  
+0Validation set starts at :0
+
+00      and ends at: 5834 and ends at:  and ends at:  and ends at:    --------------Indices--------------------------------------Indices------------------------  5833 and ends at: 5833
+
+58335833
+Training set starts at : 
+--------------Indices--------------------------------------Indices------------------------
+
+Training set starts at :--------------Indices--------------------------------------Indices------------------------ 6562Validation set starts at :
+Validation set starts at :
+Validation set starts at : 
+
+0
+   0 583458345834Validation set starts at :  and ends at:      and ends at: Validation set starts at :Validation set starts at :  and ends at:  and ends at:  and ends at: 5834   Validation set starts at :5833    583358345834 
+656265626562Testing set starts at:  and ends at: 
+  5834
+
+
+   and ends at:  and ends at:  65636562   and ends at:  
+65626562  and ends at: 
+
+6562 
+7292
+Validation set starts at : 5834  and ends at:  6562Validation set starts at :
+ 5834 Testing set starts at: Testing set starts at:  and ends at: Testing set starts at:     65636563Testing set starts at: 65626563   
+ Testing set starts at:  and ends at: Testing set starts at:  and ends at: 6563Testing set starts at:  and ends at:        65637292Testing set starts at: 65637292 and ends at: 65637292 
+  
+  
+ and ends at: 6563 and ends at: 7292Testing set starts at:  and ends at:    
+  7292 and ends at: 729265637292
+ 
+ 
+7292 and ends at: 
+ 7292
+Training set starts at :Training set starts at :  00   and ends at:  and ends at:   58335833
+
+Training set starts at :Training set starts at :  00   and ends at:  and ends at:   5833Training set starts at :Training set starts at :5833
+  
+00   and ends at:  and ends at:   58335833
+
+Validation set starts at :Validation set starts at :  58345834   and ends at:  and ends at:   65626562
+
+Validation set starts at : Validation set starts at :5834  5834 and ends at:    and ends at: 6562 
+6562
+Validation set starts at :Validation set starts at :  58345834   and ends at:  and ends at:   65626562
+
+Testing set starts at: Testing set starts at:   65636563   and ends at:  and ends at:   72927292
+
+Testing set starts at: Testing set starts at:   65636563   and ends at:  and ends at:   72927292
+
+Testing set starts at: Testing set starts at:   65636563   and ends at:  and ends at:   72927292
+
+.
+.
+--------------Fechas------------------------------
+.
+.
+--------------Fechas------------------------------
+Training set starts at : 2000-01-01  and ends at:  2016-01-01
+Validation set starts at : 2016-01-02  and ends at:  2017-12-31
+Testing set starts at:  2018-01-01  and ends at:  2019-12-31
+Training set starts at : 2000-01-01  and ends at:  2016-01-01
+.
+.
+--------------Fechas------------------------------
+Validation set starts at : 2016-01-02  and ends at:  2017-12-31
+Testing set starts at:  2018-01-01  and ends at:  2019-12-31
+Training set starts at : 2000-01-01  and ends at:  2016-01-01
+Validation set starts at : 2016-01-02  and ends at:  2017-12-31
+Testing set starts at:  2018-01-01  and ends at:  2019-12-31
+100 140
+Muestras de Train / Valid / Test:  (5834, 729, 730)
+100 140
+Muestras de Train / Valid / Test:  (5834, 729, 730)
+100 140
+Muestras de Train / Valid / Test:  (5834, 729, 730)
+..
+
+..
+
+--------------Fechas------------------------------
+--------------Fechas------------------------------
+Training set starts at : Training set starts at :2000-01-01  2000-01-01 and ends at:    and ends at: 2016-01-01 
+2016-01-01
+Validation set starts at : 2016-01-02Validation set starts at :   and ends at: 2016-01-02  2017-12-31 and ends at: 
+ 2017-12-31
+Testing set starts at:  2018-01-01Testing set starts at:    and ends at: 2018-01-01  2019-12-31 and ends at: 
+ 2019-12-31
+.
+.
+--------------Fechas------------------------------
+.
+.
+--------------Fechas------------------------------
+Training set starts at : 2000-01-01  and ends at:  2016-01-01
+Validation set starts at : 2016-01-02  and ends at:  2017-12-31
+Testing set starts at:  2018-01-01  and ends at:  2019-12-31
+Training set starts at : 2000-01-01  and ends at:  2016-01-01
+Validation set starts at : 2016-01-02  and ends at:  2017-12-31
+Testing set starts at:  2018-01-01  and ends at:  2019-12-31
+.
+.
+--------------Fechas------------------------------
+Training set starts at : 2000-01-01  and ends at:  2016-01-01
+Validation set starts at : 2016-01-02  and ends at:  2017-12-31
+Testing set starts at:  2018-01-01  and ends at:  2019-12-31
+100 140
+Muestras de Train / Valid / Test:  (5834, 729, 730)
+100 140
+Muestras de Train / Valid / Test:  (5834, 729, 730)
+.
+.
+--------------Fechas------------------------------
+100 140
+Muestras de Train / Valid / Test:  (5834, 729, 730)
+100 140
+Muestras de Train / Valid / Test:  (5834, 729, 730)
+Training set starts at : 2000-01-01  and ends at:  2016-01-01
+Validation set starts at : 2016-01-02  and ends at:  2017-12-31
+100 140
+Muestras de Train / Valid / Test:  (5834, 729, 730)
+Testing set starts at:  2018-01-01  and ends at:  2019-12-31
+.
+.
+--------------Fechas------------------------------
+Training set starts at : 2000-01-01  and ends at:  2016-01-01
+Validation set starts at : 2016-01-02  and ends at:  2017-12-31
+Testing set starts at:  2018-01-01  and ends at:  2019-12-31
+.
+.
+--------------Fechas------------------------------
+Training set starts at : 2000-01-01  and ends at:  2016-01-01
+Validation set starts at : 2016-01-02 . and ends at: 
+ .2017-12-31
+
+--------------Fechas------------------------------
+Testing set starts at:  2018-01-01  and ends at:  2019-12-31
+Training set starts at : 2000-01-01  and ends at:  2016-01-01
+Validation set starts at : 2016-01-02  and ends at:  2017-12-31
+Testing set starts at:  2018-01-01  and ends at:  2019-12-31
+100 140
+Muestras de Train / Valid / Test:  (5834, 729, 730)
+100 140
+Muestras de Train / Valid / Test:  (5834, 729, 730)
+.
+.
+--------------Fechas------------------------------
+.
+.
+--------------Fechas------------------------------
+Training set starts at : 2000-01-01  and ends at:  2016-01-01.
+
+.
+--------------Fechas------------------------------
+Validation set starts at : 2016-01-02  and ends at:  2017-12-31
+Testing set starts at:  2018-01-01  and ends at:  2019-12-31
+Training set starts at : 2000-01-01  and ends at:  2016-01-01
+Validation set starts at : 2016-01-02  and ends at:  2017-12-31
+Testing set starts at:  2018-01-01  and ends at:  2019-12-31
+Training set starts at : 2000-01-01  and ends at:  2016-01-01
+Validation set starts at : 2016-01-02  and ends at:  2017-12-31
+Testing set starts at:  2018-01-01  and ends at:  2019-12-31
+.
+.
+--------------Fechas------------------------------
+Training set starts at : 2000-01-01  and ends at:  2016-01-01
+Validation set starts at : 2016-01-02  and ends at:  2017-12-31
+Testing set starts at:  2018-01-01  and ends at:  2019-12-31
+100 140
+Muestras de Train / Valid / Test:  (5834, 729, 730)
+100 140
+Muestras de Train / Valid / Test:  (5834, 729, 730)
+100 140
+Muestras de Train / Valid / Test:  (5834, 729, 730)
+100 140
+Muestras de Train / Valid / Test:  (5834, 729, 730)
+100 140
+Muestras de Train / Valid / Test:  (5834, 729, 730)
+100 140
+Muestras de Train / Valid / Test:  (5834, 729, 730)
+/home/jruiz/anaconda3/lib/python3.11/site-packages/torch/cuda/__init__.py:619: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+/home/jruiz/anaconda3/lib/python3.11/site-packages/torch/cuda/__init__.py:619: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+/home/jruiz/anaconda3/lib/python3.11/site-packages/torch/optim/lr_scheduler.py:28: UserWarning: The verbose parameter is deprecated. Please use get_last_lr() to access the learning rate.
+  warnings.warn("The verbose parameter is deprecated. Please use get_last_lr() "
+Epoca: 1 de 40
+/home/jruiz/anaconda3/lib/python3.11/site-packages/torch/optim/lr_scheduler.py:28: UserWarning: The verbose parameter is deprecated. Please use get_last_lr() to access the learning rate.
+  warnings.warn("The verbose parameter is deprecated. Please use get_last_lr() "
+Epoca: 1 de 40
+Loss Train:  6.168484025569712e-05
+Loss Val:    7.111335435183719e-05
+Epoca: 2 de 40
+Loss Train:  4.722722510681922e-05
+Loss Val:    6.462445162469521e-05
+Epoca: 3 de 40
+Loss Train:  4.4878240552892655e-05
+Loss Val:    6.243655661819503e-05
+Epoca: 4 de 40
+Loss Train:  4.38274558491993e-05
+Loss Val:    6.108828529249877e-05
+Epoca: 5 de 40
+Loss Train:  4.3138302209041225e-05
+Loss Val:    6.010251308907755e-05
+Epoca: 6 de 40
+Loss Train:  4.2635529499128064e-05
+Loss Val:    5.938648973824456e-05
+Epoca: 7 de 40
+Loss Train:  4.2228953057250906e-05
+Loss Val:    5.880243406863883e-05
+Epoca: 8 de 40
+Loss Train:  0.00011214242828319291
+Loss Val:    7.096266199368984e-05
+Epoca: 2 de 40
+Loss Train:  4.1909847037089294e-05
+Loss Val:    5.831875023432076e-05
+Epoca: 9 de 40
+Loss Train:  4.165311444104823e-05
+Loss Val:    5.795213292003609e-05
+Epoca: 10 de 40
+Loss Train:  4.143708500092636e-05
+Loss Val:    5.7642395404400304e-05
+Epoca: 11 de 40
+Loss Train:  4.125461030418006e-05
+Loss Val:    5.7373741583433e-05
+Epoca: 12 de 40
+Loss Train:  4.110203362716228e-05
+Loss Val:    5.713907739846036e-05
+Epoca: 13 de 40
+Loss Train:  4.095104104327235e-05
+Loss Val:    5.6928780395537615e-05
+Epoca: 14 de 40
+Loss Train:  4.082640302609218e-05
+Loss Val:    5.674303974956274e-05
+Epoca: 15 de 40
+Loss Train:  4.6322941624705476e-05
+Loss Val:    6.237673369469121e-05
+Loss Train:  4.072111202685075e-05
+Loss Val:    5.6571385357528925e-05
+Epoca: 16 de 40
+Epoca: 3 de 40
+Loss Train:  4.062649319259158e-05
+Loss Val:    5.6420991313643754e-05
+Epoca: 17 de 40
+Loss Train:  4.051977912703e-05
+Loss Val:    5.628227154375054e-05
+Epoca: 18 de 40
+Loss Train:  4.0432216522631125e-05
+Loss Val:    5.6164681154768914e-05
+Epoca: 19 de 40
+Loss Train:  4.0347158512489286e-05
+Loss Val:    5.607583807432093e-05
+Epoca: 20 de 40
+Loss Train:  4.026887463469856e-05
+Loss Val:    5.597436393145472e-05
+Epoca: 21 de 40

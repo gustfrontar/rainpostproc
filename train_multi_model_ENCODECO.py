@@ -10,7 +10,7 @@ import copy
 import multiprocessing as mp
 
 os.environ['OMP_NUM_THREADS']="2"
-max_proc=16
+max_proc=8
 
 TrainConf = dc.TrainConf #Get default configuration.
 
@@ -26,16 +26,23 @@ TestParameters['BatchSize'] = [100 , 10 , 500 , 1000]         #As many batch siz
 TestParameters['LearningRate'] = [1.0e-3 , 1.0e-4 , 1.0e-5 ]  #As many learning rates as we want to test
 TestParameters['WeigthDecay']  = [1.0e-5 , 1.0e-6 , 0.0 ]     #As many Weight decay rates as we want to test
 TestParameters['KernelSize']   = [3 , 5 , 7 , 9]
-TestParameters['Pool']         = [2,3]
+TestParameters['Pool']         = [2 , 3 ]
 TestParameters['Bias']         = [True,False]
 TestParameters['OutActivation']= ['Identity','SiLU']
 TestParameters['Channels']     = [ [1,16,16,32,64,128,64,32,16,1] , [1,8,8,16,32,64,32,16,8,1] , [1,32,32,64,128,256,128,64,32,1]  ]
 
 #TrainConf['MaxEpochs']= 1
 
-#Build the sequence of configuration dictionaries that will be pased to the meta_model_training function
-ParameterList = TestParameters.keys() 
+#Build the base configuration 
+ParameterList = TestParameters.keys()
 TrainConfList = []
+for ipar , mypar in enumerate( ParameterList ) :
+    if mypar in TrainConf['ModelConf'].keys() :
+        TrainConf['ModelConf'][mypar] = TestParameters[mypar][0]
+    else :
+        TrainConf[mypar] = TestParameters[mypar][0]
+
+#Build the sequence of configuration dictionaries that will be pased to the meta_model_training function
 
 ExpNumber = 0 
 for ipar , mypar in enumerate( ParameterList ) :

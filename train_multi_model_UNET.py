@@ -10,7 +10,7 @@ import copy
 import multiprocessing as mp
 
 os.environ['OMP_NUM_THREADS']="2"
-max_proc=16
+max_proc=8
 
 TrainConf = dc.TrainConf #Get default configuration.
 
@@ -32,9 +32,16 @@ TestParameters['OutActivation']= ['Identity','SiLU']
 
 #TrainConf['MaxEpochs']= 1
 
-#Build the sequence of configuration dictionaries that will be pased to the meta_model_training function
-ParameterList = TestParameters.keys() 
+#Build the base configuration 
+ParameterList = TestParameters.keys()
 TrainConfList = []
+for ipar , mypar in enumerate( ParameterList ) :
+    if mypar in TrainConf['ModelConf'].keys() :
+        TrainConf['ModelConf'][mypar] = TestParameters[mypar][0]
+    else :
+        TrainConf[mypar] = TestParameters[mypar][0]
+
+#Build the sequence of configuration dictionaries that will be pased to the meta_model_training function
 
 ExpNumber = 0 
 for ipar , mypar in enumerate( ParameterList ) :

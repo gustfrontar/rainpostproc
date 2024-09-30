@@ -124,26 +124,29 @@ class Convolucional(torch.nn.Module):
 
 
 class conv_block(torch.nn.Module):
-    def __init__(self, in_c, out_c , kernel_size = 3 , padding = 1 , act_type = 'ReLU' , bias = False ):
+    def __init__(self, in_c, out_c , kernel_size = 3 , padding = 1 , act_type = 'ReLU' , bias = False , batchnorm = False ):
         super().__init__()
+        self.batchnorm = batchnorm
         self.conv1 = torch.nn.Conv2d(in_c, out_c, kernel_size=kernel_size, padding=padding , padding_mode='reflect' , bias = bias )
-        #self.bn1 = torch.nn.BatchNorm2d(out_c)
+        self.bn1 = torch.nn.BatchNorm2d(out_c)
         self.conv2 = torch.nn.Conv2d(out_c, out_c, kernel_size=kernel_size, padding=padding , padding_mode='reflect' , bias = bias )
-        #self.bn2 = torch.nn.BatchNorm2d(out_c)
+        self.bn2 = torch.nn.BatchNorm2d(out_c)
         exec('self.act = torch.nn.' + act_type + '()' )
     def forward(self, inputs):
         x = self.conv1(inputs)
-        #x = self.bn1(x)
+        if batchnorm :
+          x = self.bn1(x)
         x = self.act(x)
         x = self.conv2(x)
-        #x = self.bn2(x)
+        if batchnorm :
+          x = self.bn2(x)
         x = self.act(x)
         return x
     
 class encoder_block_skip(torch.nn.Module):
-    def __init__(self, in_c, out_c , pool = 2 , kernel_size = 3 , padding = 1 , act_type = 'ReLU' , bias = False ):
+    def __init__(self, in_c, out_c , pool = 2 , kernel_size = 3 , padding = 1 , act_type = 'ReLU' , bias = False , batchnorm = False ):
         super().__init__()
-        self.conv = conv_block(in_c, out_c , kernel_size = kernel_size , padding = padding , act_type = act_type , bias = bias )
+        self.conv = conv_block(in_c, out_c , kernel_size = kernel_size , padding = padding , act_type = act_type , bias = bias , batchnorm = batchnorm )
         self.pool = torch.nn.MaxPool2d((pool, pool))
     def forward(self, inputs):
         x = self.conv(inputs)
@@ -151,9 +154,9 @@ class encoder_block_skip(torch.nn.Module):
         return x, p
 
 class encoder_block(torch.nn.Module):
-    def __init__(self, in_c, out_c , pool = 2 , kernel_size = 3 , padding = 1 , act_type = 'ReLU' , bias = False ):
+    def __init__(self, in_c, out_c , pool = 2 , kernel_size = 3 , padding = 1 , act_type = 'ReLU' , bias = False , batchnorm = False ):
         super().__init__()
-        self.conv = conv_block(in_c, out_c , kernel_size = kernel_size , padding = padding , act_type = act_type , bias = bias )
+        self.conv = conv_block(in_c, out_c , kernel_size = kernel_size , padding = padding , act_type = act_type , bias = bias , batchnorm = batchnorm )
         self.pool = torch.nn.MaxPool2d((pool, pool))
     def forward(self, inputs):
         x = self.conv(inputs)
@@ -161,12 +164,12 @@ class encoder_block(torch.nn.Module):
         return x
 
 class decoder_block(torch.nn.Module):
-    def __init__(self, in_c, out_c , kernel_size = 3 , padding = 1 , decotype = 'bilinear' , act_type = 'ReLU' , bias = False ) :
+    def __init__(self, in_c, out_c , kernel_size = 3 , padding = 1 , decotype = 'bilinear' , act_type = 'ReLU' , bias = False , batchnorm = False ) :
         super().__init__()
         self.decotype = decotype
         self.upsample = torch.nn.Upsample        
 
-        self.conv = conv_block( in_c , out_c , kernel_size = kernel_size , padding = padding , act_type = act_type , bias = bias )
+        self.conv = conv_block( in_c , out_c , kernel_size = kernel_size , padding = padding , act_type = act_type , bias = bias , batchnorm = batchnorm )
         
     def forward(self, inputs , targetnx , targetny ) :
         self.up = self.upsample( size=(targetnx,targetny) , mode=self.decotype)
@@ -175,12 +178,12 @@ class decoder_block(torch.nn.Module):
         return x  
 
 class decoder_block_skip(torch.nn.Module):
-    def __init__(self, in_c, out_c , kernel_size = 3 , padding = 1 , decotype = 'bilinear' , act_type = 'ReLU' , bias = False ):
+    def __init__(self, in_c, out_c , kernel_size = 3 , padding = 1 , decotype = 'bilinear' , act_type = 'ReLU' , bias = False , batchnorm = False ):
         super().__init__()
         self.upsample = torch.nn.Upsample
         self.decotype = decotype 
 
-        self.conv = conv_block( out_c + in_c , out_c , kernel_size = kernel_size , padding = padding , act_type = act_type , bias = bias )
+        self.conv = conv_block( out_c + in_c , out_c , kernel_size = kernel_size , padding = padding , act_type = act_type , bias = bias , batchnorm = batchnorm )
         
     def forward(self, inputs, skip):
         skipnx=skip.size()[2];skipny=skip.size()[3]
@@ -302,23 +305,28 @@ class unet(torch.nn.Module):
            self.bias = model_conf['Bias']
         else :
            self.bias = False 
+        if 'BatchNorm' in model_conf.keys()
+           self.batchnorm = model_conf['BatchNorm']
+        else :
+           self.batchnorm = False
 
         self.padding = int( ( self.kernel_size  - 1 ) / 2 )
         exec('self.act     = torch.nn.' + self.act_type + '()' )
         exec('self.out_act = torch.nn.' + self.out_act_type + '()' )
         """ Input Layer """
         self.inputs = torch.nn.Conv2d( 1 , 16 , kernel_size = self.kernel_size , padding = self.padding , padding_mode = 'reflect' , bias = self.bias )
+        self.inputbn = torch.nn.BatchNorm2d( 16 ) 
         """ Encoder """
-        self.e1 = encoder_block_skip(16, 16 , kernel_size = self.kernel_size , padding = self.padding , pool = self.pool , bias = self.bias )
-        self.e2 = encoder_block_skip(16, 32 , kernel_size = self.kernel_size , padding = self.padding , pool = self.pool , bias = self.bias )
-        self.e3 = encoder_block_skip(32, 64 , kernel_size = self.kernel_size , padding = self.padding , pool = self.pool , bias = self.bias )
+        self.e1 = encoder_block_skip(16, 16 , kernel_size = self.kernel_size , padding = self.padding , pool = self.pool , bias = self.bias , batchnorm = self.batchnorm )
+        self.e2 = encoder_block_skip(16, 32 , kernel_size = self.kernel_size , padding = self.padding , pool = self.pool , bias = self.bias , batchnorm = self.batchnorm )
+        self.e3 = encoder_block_skip(32, 64 , kernel_size = self.kernel_size , padding = self.padding , pool = self.pool , bias = self.bias , batchnorm = self.batchnorm )
         """ Bottleneck """
         self.b = conv_block(64, 128 , kernel_size = self.kernel_size , padding = self.padding , bias = self.bias )
         
         """ Decoder """
-        self.d1 = decoder_block_skip(128, 64 , decotype = self.decotype , kernel_size = self.kernel_size , padding = self.padding , bias = self.bias )
-        self.d2 = decoder_block_skip(64, 32 , decotype = self.decotype , kernel_size = self.kernel_size , padding = self.padding , bias = self.bias )
-        self.d3 = decoder_block_skip(32, 16 , decotype = self.decotype , kernel_size = self.kernel_size , padding = self.padding , bias = self.bias )
+        self.d1 = decoder_block_skip(128, 64 , decotype = self.decotype , kernel_size = self.kernel_size , padding = self.padding , bias = self.bias , batchnorm = self.batchnorm )
+        self.d2 = decoder_block_skip(64, 32 , decotype = self.decotype , kernel_size = self.kernel_size , padding = self.padding , bias = self.bias , batchnorm = self.batchnorm )
+        self.d3 = decoder_block_skip(32, 16 , decotype = self.decotype , kernel_size = self.kernel_size , padding = self.padding , bias = self.bias , batchnorm = self.batchnorm )
         """ Output Layer """
         self.output = torch.nn.Conv2d(32, 1, kernel_size= self.kernel_size , padding= self.padding , bias = self.bias )
 
@@ -327,6 +335,8 @@ class unet(torch.nn.Module):
         x = x.view(batch,1,self.nx,self.ny) # x - Shape 4D: (batch size, filtros, nx, ny)
         """ Input Layer """
         x     = self.inputs( x )
+        if self.batchnorm :
+           x = self.inputbn( x )
         i1    = torch.clone( x )
         x     = self.act(x)
         """ Encoder """

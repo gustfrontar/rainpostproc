@@ -36,6 +36,8 @@ TrainConf['ModelConf']['InActivation'] = 'ReLU'             #Activation function
 TrainConf['ModelConf']['OutActivation'] = 'SiLU'            #Activation function of the output layer.
 TrainConf['ModelConf']['Bias']=[True]                       #Bias parameter. 
 
+TrainConf['ModelConf']['BatchNorm'] = False
+
 
 
    

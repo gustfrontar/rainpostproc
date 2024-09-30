@@ -27,6 +27,7 @@ TestParameters['LearningRate'] = [1.0e-3 , 1.0e-4 , 1.0e-5 ]  #As many learning 
 TestParameters['WeightDecay']  = [1.0e-5 , 1.0e-6 , 0.0 ]     #As many Weight decay rates as we want to test
 TestParameters['KernelSize']   = [3 , 5 , 7 ]
 TestParameters['Pool']         = [2 , 3 ]
+TestParameters['BatchNorm']    = [True,False]                 #Wether batch normalization will be applied or not.
 TestParameters['Bias']         = [True,False]
 TestParameters['OutActivation']= ['Identity','SiLU']
 

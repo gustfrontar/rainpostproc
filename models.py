@@ -14,7 +14,8 @@ def load_model( path ) :
 def initialize_weights(self):
     for m in self.modules():
         if isinstance(m, torch.nn.Conv2d):
-            torch.nn.init.kaiming_normal_(m.weight, mode='fan_out', nonlinearity='relu')
+            #torch.nn.init.kaiming_normal_(m.weight, mode='fan_out', nonlinearity='relu')
+            torch.nn.init.kaiming_uniform_(m.weight, mode='fan_out', nonlinearity='relu') #This one gave better results with softplus output activation
             if m.bias is not None:
                 torch.nn.init.constant_(m.bias, 0)
         elif isinstance(m, torch.nn.BatchNorm2d):
@@ -134,24 +135,65 @@ class conv_block(torch.nn.Module):
         exec('self.act = torch.nn.' + act_type + '()' )
     def forward(self, inputs):
         x = self.conv1(inputs)
-        if batchnorm :
+        if self.batchnorm :
           x = self.bn1(x)
         x = self.act(x)
         x = self.conv2(x)
-        if batchnorm :
+        if self.batchnorm :
           x = self.bn2(x)
         x = self.act(x)
         return x
-    
-class encoder_block_skip(torch.nn.Module):
-    def __init__(self, in_c, out_c , pool = 2 , kernel_size = 3 , padding = 1 , act_type = 'ReLU' , bias = False , batchnorm = False ):
+
+class unet_conv_block(torch.nn.Module):
+    #This block consists of 3 convolutional layers. The number of channels is changed from the input layer to the second layer.
+    #then is kept constant. This block is used to construct the encoder and decoder layers of the unet. 
+    #In the encoder layer the number of channels is doubled, in the decoder layer the number of channels is halved. 
+    def __init__(self, in_c , out_c , kernel_size = 3 , padding = 1 , act_type = 'ReLU' , bias = False , batchnorm = False , pool = 1 ):
         super().__init__()
-        self.conv = conv_block(in_c, out_c , kernel_size = kernel_size , padding = padding , act_type = act_type , bias = bias , batchnorm = batchnorm )
-        self.pool = torch.nn.MaxPool2d((pool, pool))
-    def forward(self, inputs):
-        x = self.conv(inputs)
-        p = self.pool(x)
-        return x, p
+        self.pool = pool
+        self.batchnorm = batchnorm
+        self.conv1 = torch.nn.Conv2d(in_c, out_c, kernel_size=kernel_size, padding=padding , padding_mode='reflect' , bias = bias )
+        self.bn1 = torch.nn.BatchNorm2d(out_c)
+        self.conv2 = torch.nn.Conv2d(out_c, out_c, kernel_size=kernel_size, padding=padding , padding_mode='reflect' , bias = bias )
+        self.bn2 = torch.nn.BatchNorm2d(out_c)
+        self.pool2d = torch.nn.MaxPool2d((pool, pool))
+        exec('self.act = torch.nn.' + act_type + '()' )
+    def forward(self, x):
+        #Max pooling 
+        if self.pool > 1 :
+          x = self.pool2d( x )
+        #First convolution ( in_c -> out_c )
+        x = self.act( self.conv1(x) )
+        if self.batchnorm :
+          x = self.bn1(x)
+        #Second convolution ( out_c -> out_c )
+        x = self.act( self.conv2(x) )
+        if self.batchnorm :
+          x = self.bn2(x)
+        #Third convolution ( out_c -> out_c )
+        x = self.act( self.conv2(x) )
+        if self.batchnorm :
+          x = self.bn2(x)
+        return x        
+
+class unet_up_block(torch.nn.Module):
+    #This block reduces the number of channels to half and upsample the output to a target nx_tar and ny_tar. 
+    #Then it concatenate the output with the information from the skip connection.
+    def __init__(self, tar_nx , tar_ny , out_c , kernel_size = 3 , padding = 1 , act_type = 'ReLU' , bias = False , batchnorm = False , upstype = 'bilinear' ):
+        super().__init__()
+        self.upstype = upstype 
+        self.batchnorm = batchnorm
+        self.up = torch.nn.Upsample( mode = upstype , size = (tar_nx,tar_ny) )
+        self.conv1 = torch.nn.Conv2d( 2 * out_c , out_c, kernel_size=kernel_size, padding=padding , padding_mode='reflect' , bias = bias )
+        self.bn = torch.nn.BatchNorm2d( out_c )
+        exec('self.act = torch.nn.' + act_type + '()' )
+
+    def forward(self, x , x_skip ):
+        x = self.act( self.conv1(x) )
+        if self.batchnorm :
+            x = self.bn( x )
+        return torch.cat([ self.up( x ) , x_skip ],dim=1)
+
 
 class encoder_block(torch.nn.Module):
     def __init__(self, in_c, out_c , pool = 2 , kernel_size = 3 , padding = 1 , act_type = 'ReLU' , bias = False , batchnorm = False ):
@@ -177,22 +219,6 @@ class decoder_block(torch.nn.Module):
         x = self.conv(x)
         return x  
 
-class decoder_block_skip(torch.nn.Module):
-    def __init__(self, in_c, out_c , kernel_size = 3 , padding = 1 , decotype = 'bilinear' , act_type = 'ReLU' , bias = False , batchnorm = False ):
-        super().__init__()
-        self.upsample = torch.nn.Upsample
-        self.decotype = decotype 
-
-        self.conv = conv_block( out_c + in_c , out_c , kernel_size = kernel_size , padding = padding , act_type = act_type , bias = bias , batchnorm = batchnorm )
-        
-    def forward(self, inputs, skip):
-        skipnx=skip.size()[2];skipny=skip.size()[3]
-        #upsample layer is defined to conform the target size of the skip tensor. 
-        self.up = self.upsample( size=(skipnx,skipny) , mode=self.decotype )
-        x = self.up(inputs)
-        x = torch.cat([x, skip], axis=1)
-        x = self.conv(x)
-        return x  
     
 class EncoderDecoder(torch.nn.Module):
     #Este modelo se parece al implementado en Persiann CNN
@@ -284,7 +310,7 @@ class unet(torch.nn.Module):
         if 'InActivation' in model_conf.keys() :
            self.act_type = model_conf['InActivation']
         else :
-           self.decotype = 'ReLU'
+           self.act_type = 'ReLU'
         if 'OutActivation' in model_conf.keys() :
            self.out_act_type = model_conf['OutActivation']
         else :
@@ -305,54 +331,69 @@ class unet(torch.nn.Module):
            self.bias = model_conf['Bias']
         else :
            self.bias = False 
-        if 'BatchNorm' in model_conf.keys()
+        if 'BatchNorm' in model_conf.keys() :
            self.batchnorm = model_conf['BatchNorm']
         else :
            self.batchnorm = False
+        if 'Channels' in model_conf.keys() :
+           self.channels = model_conf['Channels']
+        else :
+           self.channels = 64
 
         self.padding = int( ( self.kernel_size  - 1 ) / 2 )
         exec('self.act     = torch.nn.' + self.act_type + '()' )
         exec('self.out_act = torch.nn.' + self.out_act_type + '()' )
-        """ Input Layer """
-        self.inputs = torch.nn.Conv2d( 1 , 16 , kernel_size = self.kernel_size , padding = self.padding , padding_mode = 'reflect' , bias = self.bias )
-        self.inputbn = torch.nn.BatchNorm2d( 16 ) 
-        """ Encoder """
-        self.e1 = encoder_block_skip(16, 16 , kernel_size = self.kernel_size , padding = self.padding , pool = self.pool , bias = self.bias , batchnorm = self.batchnorm )
-        self.e2 = encoder_block_skip(16, 32 , kernel_size = self.kernel_size , padding = self.padding , pool = self.pool , bias = self.bias , batchnorm = self.batchnorm )
-        self.e3 = encoder_block_skip(32, 64 , kernel_size = self.kernel_size , padding = self.padding , pool = self.pool , bias = self.bias , batchnorm = self.batchnorm )
-        """ Bottleneck """
-        self.b = conv_block(64, 128 , kernel_size = self.kernel_size , padding = self.padding , bias = self.bias )
-        
-        """ Decoder """
-        self.d1 = decoder_block_skip(128, 64 , decotype = self.decotype , kernel_size = self.kernel_size , padding = self.padding , bias = self.bias , batchnorm = self.batchnorm )
-        self.d2 = decoder_block_skip(64, 32 , decotype = self.decotype , kernel_size = self.kernel_size , padding = self.padding , bias = self.bias , batchnorm = self.batchnorm )
-        self.d3 = decoder_block_skip(32, 16 , decotype = self.decotype , kernel_size = self.kernel_size , padding = self.padding , bias = self.bias , batchnorm = self.batchnorm )
-        """ Output Layer """
-        self.output = torch.nn.Conv2d(32, 1, kernel_size= self.kernel_size , padding= self.padding , bias = self.bias )
+
+        #Channels at the different depths are a function of channels defined for the first layer. 
+        self.ch_1 = self.channels
+        self.ch_2 = self.channels * 2
+        self.ch_3 = self.channels * 4
+        self.ch_4 = self.channels * 8 
+        self.ch_5 = self.channels * 16
+        #Pooling is performed at the beginning of the conv block so the first conv_block should not perform any pooling (pool = 1) 
+        self.enco_1 = unet_conv_block( 1         , self.ch_1 , kernel_size = self.kernel_size , padding = self.padding , act_type = self.act_type , bias = self.bias , batchnorm = self.batchnorm , pool=1 )
+        self.enco_2 = unet_conv_block( self.ch_1 , self.ch_2 , kernel_size = self.kernel_size , padding = self.padding , act_type = self.act_type , bias = self.bias , batchnorm = self.batchnorm , pool=self.pool )
+        self.enco_3 = unet_conv_block( self.ch_2 , self.ch_3 , kernel_size = self.kernel_size , padding = self.padding , act_type = self.act_type , bias = self.bias , batchnorm = self.batchnorm , pool=self.pool )
+        self.enco_4 = unet_conv_block( self.ch_3 , self.ch_4 , kernel_size = self.kernel_size , padding = self.padding , act_type = self.act_type , bias = self.bias , batchnorm = self.batchnorm , pool=self.pool )
+        self.enco_5 = unet_conv_block( self.ch_4 , self.ch_5 , kernel_size = self.kernel_size , padding = self.padding , act_type = self.act_type , bias = self.bias , batchnorm = self.batchnorm , pool=self.pool )
+
+        self.deco_4 = unet_conv_block( self.ch_5 , self.ch_4 , kernel_size = self.kernel_size , padding = self.padding , act_type = self.act_type , bias = self.bias , batchnorm = self.batchnorm , pool=1 ) 
+        self.deco_3 = unet_conv_block( self.ch_4 , self.ch_3 , kernel_size = self.kernel_size , padding = self.padding , act_type = self.act_type , bias = self.bias , batchnorm = self.batchnorm , pool=1 )
+        self.deco_2 = unet_conv_block( self.ch_3 , self.ch_2 , kernel_size = self.kernel_size , padding = self.padding , act_type = self.act_type , bias = self.bias , batchnorm = self.batchnorm , pool=1 )
+        self.deco_1 = unet_conv_block( self.ch_2 , self.ch_1 , kernel_size = self.kernel_size , padding = self.padding , act_type = self.act_type , bias = self.bias , batchnorm = self.batchnorm , pool=1 )
+
+        self.nx_1 = self.nx ; self.ny_1 = self.ny 
+        self.nx_2 = int( self.nx_1 / self.pool ) ; self.ny_2 = int( self.ny_1 / self.pool )
+        self.nx_3 = int( self.nx_2 / self.pool ) ; self.ny_3 = int( self.ny_2 / self.pool )
+        self.nx_4 = int( self.nx_3 / self.pool ) ; self.ny_4 = int( self.ny_3 / self.pool )
+
+        #Upsample convolutions layers uses a kernel_size of 1 in the original implementation of the U-NET.
+        self.up_1 = unet_up_block( self.nx_1 , self.ny_1 , self.ch_1 , kernel_size = 1 , upstype = self.decotype , padding = self.padding , act_type = self.act_type , bias = self.bias , batchnorm = self.batchnorm )
+        self.up_2 = unet_up_block( self.nx_2 , self.ny_2 , self.ch_2 , kernel_size = 1 , upstype = self.decotype , padding = self.padding , act_type = self.act_type , bias = self.bias , batchnorm = self.batchnorm )
+        self.up_3 = unet_up_block( self.nx_3 , self.ny_3 , self.ch_3 , kernel_size = 1 , upstype = self.decotype , padding = self.padding , act_type = self.act_type , bias = self.bias , batchnorm = self.batchnorm )
+        self.up_4 = unet_up_block( self.nx_4 , self.ny_4 , self.ch_4 , kernel_size = 1 , upstype = self.decotype , padding = self.padding , act_type = self.act_type , bias = self.bias , batchnorm = self.batchnorm )
+
+        self.out = torch.nn.Conv2d( self.ch_1 , 1, kernel_size=self.kernel_size , padding= self.padding , bias = self.bias )
 
     def forward(self, x ):
         batch = x.shape[0]
         x = x.view(batch,1,self.nx,self.ny) # x - Shape 4D: (batch size, filtros, nx, ny)
-        """ Input Layer """
-        x     = self.inputs( x )
-        if self.batchnorm :
-           x = self.inputbn( x )
-        i1    = torch.clone( x )
-        x     = self.act(x)
-        """ Encoder """
-        s1, x = self.e1(x)
-        s2, x = self.e2(x)
-        s3, x = self.e3(x)
-        """ Bottleneck """
-        x = self.b(x)
-        """ Decoder """
-        x = self.d1(x, s3)
-        x = self.d2(x, s2)
-        x = self.d3(x, s1)
-        """ Output Layer """
-        x = torch.cat([x, i1], axis=1)
-        x = self.output(x)
-        x = self.out_act(x) 
-        
+        #Encoding
+        x_1 = self.enco_1( x   )
+        x_2 = self.enco_2( x_1 )
+        x_3 = self.enco_3( x_2 )
+        x_4 = self.enco_4( x_3 )
+        x   = self.enco_5( x_4 ) #This is the bottleneck
+        #Decoding
+        x = self.up_4( x , x_4 )
+        x = self.deco_4( x )
+        x = self.up_3( x , x_3 ) 
+        x = self.deco_3( x )
+        x = self.up_2( x , x_2 )
+        x = self.deco_2( x )
+        x = self.up_1( x , x_1 )
+        x = self.deco_1( x )
+        #Output layer
+        x = self.out_act( self.out( x ) )
 
         return x.view(batch,self.nx,self.ny)

@@ -9,30 +9,30 @@ import default_conf as dc
 import copy
 import multiprocessing as mp
 
-os.environ["OMP_NUM_THREADS"]="20"
-max_proc=2
+os.environ['OMP_NUM_THREADS']="4"
+max_proc=1
 
 TrainConf = dc.TrainConf #Get default configuration.
 
 #Exp type
 TrainConf['ModelClass'] = models.unet  #Determino el modelo a utilizar.
-TrainConf['ExpName']    = 'MULTI-UNET'
+TrainConf['ExpName']    = 'TEST_TEST'
 
 #####################################################
 ## Parameters to be tested >
 TestParameters = dict()
 RandomSeed   = [1029]  #As many random seed as initailization experiments we want to perform.
-TestParameters['BatchSize'] =    [100 , 10 , 500 ]                     #As many batch sizes as we want to test
-TestParameters['LearningRate'] = [1.0e-3 , 1.0e-4 , 1.0e-2 ]           #As many learning rates as we want to test
-TestParameters['WeightDecay']  = [0.0 , 1.0e-6 , 1.0e-5 , 1.0e-4 ]     #As many Weight decay rates as we want to test
-TestParameters['KernelSize']   = [3 , 5 ]
+TestParameters['BatchSize'] = [100 ]           #As many batch sizes as we want to test
+TestParameters['LearningRate'] = [1.0e-3 ]     #As many learning rates as we want to test
+TestParameters['WeightDecay']  = [0.0 ]        #As many Weight decay rates as we want to test
+TestParameters['KernelSize']   = [3 ]
 TestParameters['Pool']         = [2 ]
-TestParameters['BatchNorm']    = [False,True]                          #Wether batch normalization will be applied or not.
-TestParameters['Bias']         = [False,True]
-TestParameters['OutActivation']= ['Identity','SiLU','Softplus']
-TestParameters['Channels']     = [8,16,32,64]
+TestParameters['BatchNorm']    = [False]       #Wether batch normalization will be applied or not.
+TestParameters['Bias']         = [False]
+TestParameters['OutActivation']= ['Identity'] #['Softplus']
+TestParameters['Channels']     = [8]           #Number of filters in the first convolution. (the others will be increased by a factor of 2)
 
-TrainConf['MaxEpochs']= 60
+#TrainConf['MaxEpochs']= 1
 
 #Build the base configuration 
 ParameterList = TestParameters.keys()
@@ -61,7 +61,7 @@ for ipar , mypar in enumerate( ParameterList ) :
                     TrainConfList[-1][ mypar ] = myparval 
                 TrainConfList[-1]['RandomSeed'] = myseed
                 TrainConfList[-1]['HyperParameter'] = mypar   #Store the hyper parameter being explored
-                TrainConfList[-1]['ExpNumber'] = ExpNumber
+                TrainConfList[-1]['ExpNumber'] = 1 #ExpNumber
                 ExpNumber = ExpNumber + 1 
 
 ########################################################################################################
@@ -71,18 +71,19 @@ for ipar , mypar in enumerate( ParameterList ) :
 #def dummy( input ) :
 #    print(input['ModelConf']['Pool'] , input['ModelConf']['KernelSize'])
 #    return 0
-print(' We will perform ' + str( len(TrainConfList) ) + ' experiments ')   
 
-if tu.device == 'cpu' :
-   pool = mp.Pool( min( max_proc , len( TrainConfList ) ) )
-   pool.map( tu.meta_model_train , TrainConfList ) 
-   pool.close
-else                  :
-   for my_conf in TrainConfList :
-       tu.meta_model_train( my_conf )
+for my_conf in TrainConfList :
+    tu.meta_model_train( my_conf )
 
+
+#print(' We will perform ' + str( len(TrainConfList) ) + ' experiments ')   
+#pool = mp.Pool( min( max_proc , len( TrainConfList ) ) )
+#pool.map( tu.meta_model_train , TrainConfList ) 
+
+#tu.meta_model_train( TrainConfList[0] )
 #pool.map( dummy , TrainConfList )
 
+#pool.close()
 
 
 

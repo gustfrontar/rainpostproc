@@ -10,7 +10,7 @@ import plots
 import gc
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
-device = 'cpu' #Forzamos cpu
+#device = 'cpu' #Forzamos cpu
 
 def define_seed(seed):
     torch.manual_seed(seed)
@@ -121,7 +121,7 @@ def trainer( TrainConf , Data ) :
 
 def model_eval( model, dataset, numpy=False , denorm = False):
     
-    model.to('cpu')
+    model.to( device )
     model.eval()
 
     dataloader = torch.utils.data.DataLoader(dataset, batch_size=100, shuffle=False)
@@ -133,6 +133,7 @@ def model_eval( model, dataset, numpy=False , denorm = False):
     with torch.no_grad():
         for batch in dataloader:
             my_input, my_target = batch
+            my_input, my_target = my_input.to(device) , my_target.to(device)
             my_input_list.append(my_input)
             my_target_list.append(my_target)
 

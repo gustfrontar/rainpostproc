@@ -16,12 +16,13 @@ TrainConf = dc.TrainConf #Get default configuration.
 
 #Exp type
 TrainConf['ModelClass'] = models.unet  #Determino el modelo a utilizar.
-TrainConf['ExpName']    = 'MULTI-UNET'
-TrainConf['DataPath'] ="../data/medios.npz"
-TrainConf['InputName']      = 'pp_medios_gfs'
-TrainConf['TargetName']     = 'pp_medios_gsmap'
-TrainConf['EarlyStop'] = True   #Early stoping
-TrainConf['Patience'] = 10 
+TrainConf['ExpName']    = 'MULTI-UNET-GOES'
+TrainConf['DataPath']   = "../data/datosRRQPE_DPR.npz"
+TrainConf['InputName']  = 'RRQPE'
+TrainConf['TargetName'] = 'DPR'
+TrainConf['EarlyStop']  = True   #Early stoping
+TrainConf['Patience']   = 10 
+TrainConf['DateFileName'] = None
 
 #####################################################
 ## Parameters to be tested >
@@ -30,11 +31,12 @@ RandomSeed   = [1029]  #As many random seed as initailization experiments we wan
 TestParameters['BatchSize'] =    [10 , 100 , 500 ]                     #As many batch sizes as we want to test
 TestParameters['LearningRate'] = [1.0e-4 , 1.0e-3 , 1.0e-2  , 1.0e-5 ]           #As many learning rates as we want to test
 TestParameters['WeightDecay']  = [0.0 , 1.0e-8 , 1.0e-6 , 1.0e-4 ]     #As many Weight decay rates as we want to test
-TestParameters['KernelSize']   = [5 , 3 , 9]
+TestParameters['KernelSize']   = [5 , 3 ]
 TestParameters['Pool']         = [2]
 TestParameters['BatchNorm']    = [False,True]                          #Wether batch normalization will be applied or not.
 TestParameters['Bias']         = [True,False]
-TestParameters['OutActivation']= ['SiLU','Identity','Softplus']
+TestParameters['OutActivation']= ['SiLU','Identity','Softplus','Sigmoid']
+TestParameters['InActivation'] = ['ReLU','SiLU','LeakyReLU']
 TestParameters['Channels']     = [8,16,32,64]
 TestParameters['LrDecay']      = [True,False]
 TestParameters['Milestones']=[[20]]

@@ -22,24 +22,24 @@ TrainConf['InputName']      = 'pp_medios_gfs'
 TrainConf['TargetName']     = 'pp_medios_gsmap'
 TrainConf['EarlyStop'] = True   #Early stoping
 TrainConf['Patience'] = 10 
+TrainConf['MaxEpochs']= 200
+TrainConf['BatchSize'] =    10                   #As many batch sizes as we want to test
+TrainConf['LearningRate'] = 1.0e-4           #As many learning rates as we want to test
+TrainConf['WeightDecay']  = 0.0     #As many Weight decay rates as we want to test
+TrainConf['KernelSize']   = 5
+TrainConf['Pool']         = 2
+TrainConf['BatchNorm']    = False                          #Wether batch normalization will be applied or not.
+TrainConf['Bias']         = True
+TrainConf['OutActivation']= 'SiLU'
+TrainConf['Channels']     = 16
+TrainConf['LrDecay']      = False
+
 
 #####################################################
 ## Parameters to be tested >
 TestParameters = dict()
-RandomSeed   = [1029]  #As many random seed as initailization experiments we want to perform.
-TestParameters['BatchSize'] =    [10 , 100 , 500 ]                     #As many batch sizes as we want to test
-TestParameters['LearningRate'] = [1.0e-4 , 1.0e-3 , 1.0e-2  , 1.0e-5 ]           #As many learning rates as we want to test
-TestParameters['WeightDecay']  = [0.0 , 1.0e-8 , 1.0e-6 , 1.0e-4 ]     #As many Weight decay rates as we want to test
-TestParameters['KernelSize']   = [5 , 3 , 9]
-TestParameters['Pool']         = [2]
-TestParameters['BatchNorm']    = [False,True]                          #Wether batch normalization will be applied or not.
-TestParameters['Bias']         = [True,False]
-TestParameters['OutActivation']= ['SiLU','Identity','Softplus']
-TestParameters['Channels']     = [8,16,32,64]
-TestParameters['LrDecay']      = [True,False]
-TestParameters['Milestones']=[[20]]
-
-TrainConf['MaxEpochs']= 200
+RandomSeed = [1029,1030,1031,1032,1033,1034,1035,1036,1037,1038]  #As many random seed as initailization experiments we want to perform.
+TestParameters['Channels']=[16]
 
 #Build the base configuration 
 ParameterList = TestParameters.keys()

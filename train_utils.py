@@ -9,33 +9,44 @@ import os
 import plots
 import gc
 
-device = 'cuda' if torch.cuda.is_available() else 'cpu'
-#device = 'cpu' #Forzamos cpu
+#device = 'cuda' if torch.cuda.is_available() else 'cpu'
+device = 'cpu' #Forzamos cpu
 
 def define_seed(seed):
     torch.manual_seed(seed)
     np.random.seed(seed)
     random.seed(seed)
+
+#Early stopper class 
+#https://stackoverflow.com/questions/71998978/early-stopping-in-pytorch
+class EarlyStopper:
+    def __init__(self, patience=1, min_delta=0):
+        self.patience = patience
+        self.min_delta = min_delta
+        self.counter = 0
+        self.min_validation_loss = float('inf')
+        print('Early stop is enabled')
+
+    def early_stop(self, TrainConf , model , validation_loss ):
+        if validation_loss < self.min_validation_loss:
+            self.min_validation_loss = validation_loss
+            self.counter = 0
+            #Save the model that produces the minimum of the validation loss.
+            print('The validation loss is the minimum reached so far.')
+            print('Saving the current version of the model as the BestModel.')
+            OutPath = TrainConf['OutPath'] + TrainConf['ExpName'] + "_" + str(TrainConf['ExpNumber']) + "/"
+            models.save_model( model , OutPath , modelname='BestModel' )
+        elif validation_loss > (self.min_validation_loss * (1.0 + self.min_delta / 100.0 ) ):
+            self.counter += 1
+            if self.counter >= self.patience:
+                return True
+        return False    
     
 
-#def model_eval( model , dataloader , denorm=True )  :
-#    
-#    model.eval()
-#    input , target = next( iter( dataloader ) )
-#    input = input.detach().to(device)
-#    with torch.no_grad():
-#         output = model( input )
-#         
-#    if denorm :
-#       input = dataloader.dataset.denormx( input )
-#       target = dataloader.dataset.denormy( target )
-#       output = dataloader.dataset.denormy( output )
-#  
-#    return input , target , output         
     
 #Funcion que entrena el modelo y hace una validacion basica de su desempenio.   
 def trainer( TrainConf , Data ) : 
-    
+
     #Definimos el modelo en base a la clase seleccionada y la configuracion. 
     model = TrainConf['ModelClass']( TrainConf['ModelConf'] )
 
@@ -47,6 +58,11 @@ def trainer( TrainConf , Data ) :
     #Params conjunto de parametros que definen mi kernel
     #Para cada celdita del kernel tenes un 1 parametro X la cantidad de parametros 
     optimizer = torch.optim.Adam( model.parameters() , lr=TrainConf['LearningRate'] , weight_decay=TrainConf['WeightDecay'] ) 
+
+    #Early stopper initialization
+    if TrainConf['EarlyStop'] :
+        early_stopper = EarlyStopper(patience=TrainConf['Patience'], min_delta=TrainConf['MinDelta'])
+
 
     if ( TrainConf['LossType'] is None or TrainConf['LossType'] == "MSE" ) :
         Loss = torch.nn.MSELoss(reduction='mean')
@@ -109,6 +125,15 @@ def trainer( TrainConf , Data ) :
         #Mostramos por pantalla la loss de esta epoca para training y validacion.
         print('Loss Train: ', str(Stats['LossTrain'][epoch]))
         print('Loss Val:   ', str(Stats['LossVal'][epoch]))
+
+        if TrainConf['EarlyStop'] :
+           if early_stopper.early_stop( TrainConf , model , Stats['LossVal'][epoch] ):  
+              print('Warning: We have reached the patience of the early stop criteria')
+              print('Stoping the training of the model') 
+              print('Recovering the most successful version of the model')
+              OutPath = TrainConf['OutPath'] + TrainConf['ExpName'] + "_" + str(TrainConf['ExpNumber']) + "/"
+              model = models.load_model( OutPath , modelname = 'BestModel' )
+              break
 
         #Calculamos metricas sobre el conjunto de testing con los datos desnormailzados.
         _ , target_test , output_test = model_eval( model , Data['TestDataSet'] , numpy=True , denorm = True )
@@ -193,6 +218,6 @@ def meta_model_train( TrainConf ) :
         pickle.dump( TrainConf , handle , protocol=pickle.HIGHEST_PROTOCOL )
 
     #Plot basic training statistics
-    plots.PlotModelStats( ModelStats , OutPath )
+    #plots.PlotModelStats( ModelStats , OutPath )
 
     return 0 

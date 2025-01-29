@@ -22,9 +22,9 @@ TrainConf['ExpName']    = 'TEST_TEST'
 ## Parameters to be tested >
 TestParameters = dict()
 RandomSeed   = [1029]  #As many random seed as initailization experiments we want to perform.
-TestParameters['BatchSize'] = [100 ]           #As many batch sizes as we want to test
+TestParameters['BatchSize'] = [10 ]           #As many batch sizes as we want to test
 TestParameters['LearningRate'] = [1.0e-3 ]     #As many learning rates as we want to test
-TestParameters['WeightDecay']  = [0.0 ]        #As many Weight decay rates as we want to test
+TestParameters['WeightDecay']  = [0.0    ]        #As many Weight decay rates as we want to test
 TestParameters['KernelSize']   = [3 ]
 TestParameters['Pool']         = [2 ]
 TestParameters['BatchNorm']    = [False]       #Wether batch normalization will be applied or not.

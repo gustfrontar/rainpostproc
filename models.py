@@ -2,20 +2,21 @@ import torch
 import os
 import numpy as np
 
-def save_model( model , path ) :
+def save_model( model , path , modelname='model') :
     
-    torch.save( model , path + "/model.pth")
+    torch.save( model , path + '/' + modelname + '.pth')
 
-def load_model( path ) :
-    model = torch.load( path + '/model.pth' )     
+def load_model( path , modelname='model') :
+    model = torch.load( path + '/' + modelname + '.pth' )     
     return model     
 
 #Inicializas tu kernel de manera aleatoria
 def initialize_weights(self):
     for m in self.modules():
         if isinstance(m, torch.nn.Conv2d):
-            #torch.nn.init.kaiming_normal_(m.weight, mode='fan_out', nonlinearity='relu')
-            torch.nn.init.kaiming_uniform_(m.weight, mode='fan_out', nonlinearity='relu') #This one gave better results with softplus output activation
+            #torch.nn.init.normal_(m.weight) 
+            torch.nn.init.kaiming_normal_(m.weight, mode='fan_out', nonlinearity='relu')
+            #torch.nn.init.kaiming_uniform_(m.weight, mode='fan_out', nonlinearity='relu') #This one gave better results with softplus output activation
             if m.bias is not None:
                 torch.nn.init.constant_(m.bias, 0)
         elif isinstance(m, torch.nn.BatchNorm2d):
@@ -153,9 +154,8 @@ class unet_conv_block(torch.nn.Module):
         self.pool = pool
         self.batchnorm = batchnorm
         self.conv1 = torch.nn.Conv2d(in_c, out_c, kernel_size=kernel_size, padding=padding , padding_mode='reflect' , bias = bias )
-        self.bn1 = torch.nn.BatchNorm2d(out_c)
+        self.bn = torch.nn.BatchNorm2d(out_c)
         self.conv2 = torch.nn.Conv2d(out_c, out_c, kernel_size=kernel_size, padding=padding , padding_mode='reflect' , bias = bias )
-        self.bn2 = torch.nn.BatchNorm2d(out_c)
         self.pool2d = torch.nn.MaxPool2d((pool, pool))
         exec('self.act = torch.nn.' + act_type + '()' )
     def forward(self, x):
@@ -163,17 +163,20 @@ class unet_conv_block(torch.nn.Module):
         if self.pool > 1 :
           x = self.pool2d( x )
         #First convolution ( in_c -> out_c )
-        x = self.act( self.conv1(x) )
+        x = self.conv1( x ) 
         if self.batchnorm :
-          x = self.bn1(x)
+           x = self.bn(x)
+        x = self.act( x )
         #Second convolution ( out_c -> out_c )
-        x = self.act( self.conv2(x) )
+        x = self.conv2( x ) 
         if self.batchnorm :
-          x = self.bn2(x)
+           x = self.bn(x)
+        x = self.act( x )
         #Third convolution ( out_c -> out_c )
-        x = self.act( self.conv2(x) )
-        if self.batchnorm :
-          x = self.bn2(x)
+        #x = self.conv2( x )
+        #if self.batchnorm :
+        #   x = self.bn(x)
+        #x = self.act( x )
         return x        
 
 class unet_up_block(torch.nn.Module):
@@ -189,9 +192,10 @@ class unet_up_block(torch.nn.Module):
         exec('self.act = torch.nn.' + act_type + '()' )
 
     def forward(self, x , x_skip ):
-        x = self.act( self.conv1(x) )
+        x = self.conv1( x )
         if self.batchnorm :
-            x = self.bn( x )
+           x = self.bn( x )
+        x = self.act( x )
         return torch.cat([ self.up( x ) , x_skip ],dim=1)
 
 

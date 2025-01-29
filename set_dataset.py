@@ -76,10 +76,16 @@ def get_data( Conf ) :
     Data=dict()
 
     #Cargamos todos los datos de precipitacion de nuestro modelo
-    Input = data_from_file[ Conf['InputName'] ][:,:-1,:-1]
+    if Conf['TempFix'] : #Temporal fix for data size difference among experiments.
+       Input = data_from_file[ Conf['InputName'] ][:,:-1,:-1]
+    else  :
+       Input = data_from_file[ Conf['InputName'] ][:,:,:]
 
     #Cargamos todos los datos de precipitacion observado
-    Target = data_from_file[ Conf['TargetName'] ][:,:-1,:-1]
+    if Conf['TempFix'] : #Temporal fix for data size difference among experiments.
+       Target = data_from_file[ Conf['TargetName'] ][:,:-1,:-1]
+    else  :
+       Target = data_from_file[ Conf['TargetName'] ][:,:,:]
   
     #En este caso tanto el input como el target tiene las mismas dimensiones, por eso podemos usarlas para ambos
     Data['TotalLen'], Data['Nx'], Data['Ny']  = Input.shape

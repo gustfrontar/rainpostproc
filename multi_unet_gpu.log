@@ -1,0 +1,1035 @@
+ We will perform 10 experiments 
+My outpath is :  ../experiments/MULTI-UNET_0/
+../experiments/MULTI-UNET_0/
+--------------Indices------------------------
+Training set starts at : 0  and ends at:  5833
+Validation set starts at : 5834  and ends at:  6562
+Testing set starts at:  6563  and ends at:  7292
+.
+.
+--------------Fechas------------------------------
+Training set starts at : 2000-01-01  and ends at:  2016-01-01
+Validation set starts at : 2016-01-02  and ends at:  2017-12-31
+Testing set starts at:  2018-01-01  and ends at:  2019-12-31
+100 140
+Muestras de Train / Valid / Test:  (5834, 729, 730)
+Early stop is enabled
+Epoca: 1 de 200
+Loss Train:  4.5064814675124454e-05
+Loss Val:    6.0834416217403486e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 2 de 200
+Loss Train:  4.20803088675319e-05
+Loss Val:    5.830673762829974e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 3 de 200
+Loss Train:  4.1445490704247323e-05
+Loss Val:    5.7635876146377996e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 4 de 200
+Loss Train:  4.106012536869632e-05
+Loss Val:    5.644169505103491e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 5 de 200
+Loss Train:  4.0762085929260784e-05
+Loss Val:    5.6048585975077e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 6 de 200
+Loss Train:  4.0522867361189175e-05
+Loss Val:    5.517533281818032e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 7 de 200
+Loss Train:  4.0379014691698976e-05
+Loss Val:    5.476119622471742e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 8 de 200
+Loss Train:  4.010599795495568e-05
+Loss Val:    5.4699812608305365e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 9 de 200
+Loss Train:  3.979431659373616e-05
+Loss Val:    5.475016951095313e-05
+Epoca: 10 de 200
+Loss Train:  3.949062824182737e-05
+Loss Val:    5.454931306303479e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 11 de 200
+Loss Train:  3.9290135382325635e-05
+Loss Val:    5.458479427034035e-05
+Epoca: 12 de 200
+Loss Train:  3.9119062755819505e-05
+Loss Val:    5.4403673857450485e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 13 de 200
+Loss Train:  3.889454013368752e-05
+Loss Val:    5.492206764756702e-05
+Epoca: 14 de 200
+Loss Train:  3.866020252934043e-05
+Loss Val:    5.5130170949269086e-05
+Epoca: 15 de 200
+Loss Train:  3.837584334712418e-05
+Loss Val:    5.517846147995442e-05
+Epoca: 16 de 200
+Loss Train:  3.839678752906241e-05
+Loss Val:    5.459429667098448e-05
+Epoca: 17 de 200
+Loss Train:  3.8260515594078096e-05
+Loss Val:    5.480173786054365e-05
+Epoca: 18 de 200
+Loss Train:  3.784871083679444e-05
+Loss Val:    5.6339329603360966e-05
+Epoca: 19 de 200
+Loss Train:  3.787190694941722e-05
+Loss Val:    5.5512071412522346e-05
+Epoca: 20 de 200
+Loss Train:  3.757793314752521e-05
+Loss Val:    5.5798893299652264e-05
+Epoca: 21 de 200
+Loss Train:  3.7187616646627385e-05
+Loss Val:    5.767203401774168e-05
+Epoca: 22 de 200
+Loss Train:  3.708281139882287e-05
+Loss Val:    5.7501241826685145e-05
+Epoca: 23 de 200
+Loss Train:  3.6875593028068196e-05
+Loss Val:    5.8618348703021184e-05
+Warning: We have reached the patience of the early stop criteria
+Stoping the training of the model
+Recovering the most successful version of the model
+My outpath is :  ../experiments/MULTI-UNET_1/
+../experiments/MULTI-UNET_1/
+--------------Indices------------------------
+Training set starts at : 0  and ends at:  5833
+Validation set starts at : 5834  and ends at:  6562
+Testing set starts at:  6563  and ends at:  7292
+.
+.
+--------------Fechas------------------------------
+Training set starts at : 2000-01-01  and ends at:  2016-01-01
+Validation set starts at : 2016-01-02  and ends at:  2017-12-31
+Testing set starts at:  2018-01-01  and ends at:  2019-12-31
+100 140
+Muestras de Train / Valid / Test:  (5834, 729, 730)
+Early stop is enabled
+Epoca: 1 de 200
+Loss Train:  5.6807773599502234e-05
+Loss Val:    6.312078767223284e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 2 de 200
+Loss Train:  4.2732926756686275e-05
+Loss Val:    5.805306864203885e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 3 de 200
+Loss Train:  4.148135307081534e-05
+Loss Val:    5.609211075352505e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 4 de 200
+Loss Train:  4.100409806948834e-05
+Loss Val:    5.5814114602981135e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 5 de 200
+Loss Train:  4.056405706299376e-05
+Loss Val:    5.522037827176973e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 6 de 200
+Loss Train:  4.03284003179535e-05
+Loss Val:    5.5047636124072596e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 7 de 200
+Loss Train:  4.0148502543151816e-05
+Loss Val:    5.4484371503349394e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 8 de 200
+Loss Train:  3.985652702337188e-05
+Loss Val:    5.4489573813043535e-05
+Epoca: 9 de 200
+Loss Train:  3.974072789354953e-05
+Loss Val:    5.4477615776704624e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 10 de 200
+Loss Train:  3.949552850077789e-05
+Loss Val:    5.437624713522382e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 11 de 200
+Loss Train:  3.933430507427832e-05
+Loss Val:    5.507361493073404e-05
+Epoca: 12 de 200
+Loss Train:  3.9240496860186685e-05
+Loss Val:    5.440929453470744e-05
+Epoca: 13 de 200
+Loss Train:  3.899109186852612e-05
+Loss Val:    5.4998839914333075e-05
+Epoca: 14 de 200
+Loss Train:  3.884411004552731e-05
+Loss Val:    5.438219886855222e-05
+Epoca: 15 de 200
+Loss Train:  3.859495398910751e-05
+Loss Val:    5.4529453336726874e-05
+Epoca: 16 de 200
+Loss Train:  3.833542942210792e-05
+Loss Val:    5.534572483156808e-05
+Epoca: 17 de 200
+Loss Train:  3.844294164150908e-05
+Loss Val:    5.514635631698184e-05
+Epoca: 18 de 200
+Loss Train:  3.801381331659784e-05
+Loss Val:    5.5986125516938046e-05
+Epoca: 19 de 200
+Loss Train:  3.8449547531627104e-05
+Loss Val:    5.535060336114839e-05
+Epoca: 20 de 200
+Loss Train:  3.801053818490688e-05
+Loss Val:    5.677499211742543e-05
+Epoca: 21 de 200
+Loss Train:  3.78690867134151e-05
+Loss Val:    5.621047239401378e-05
+Epoca: 22 de 200
+Loss Train:  3.7645798092215e-05
+Loss Val:    5.6197804951807484e-05
+Epoca: 23 de 200
+Loss Train:  3.7429117986442316e-05
+Loss Val:    5.710796904168092e-05
+Warning: We have reached the patience of the early stop criteria
+Stoping the training of the model
+Recovering the most successful version of the model
+My outpath is :  ../experiments/MULTI-UNET_2/
+../experiments/MULTI-UNET_2/
+--------------Indices------------------------
+Training set starts at : 0  and ends at:  5833
+Validation set starts at : 5834  and ends at:  6562
+Testing set starts at:  6563  and ends at:  7292
+.
+.
+--------------Fechas------------------------------
+Training set starts at : 2000-01-01  and ends at:  2016-01-01
+Validation set starts at : 2016-01-02  and ends at:  2017-12-31
+Testing set starts at:  2018-01-01  and ends at:  2019-12-31
+100 140
+Muestras de Train / Valid / Test:  (5834, 729, 730)
+Early stop is enabled
+Epoca: 1 de 200
+Loss Train:  4.494695812734615e-05
+Loss Val:    6.106630462454632e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 2 de 200
+Loss Train:  4.1657437047779367e-05
+Loss Val:    5.683510607923381e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 3 de 200
+Loss Train:  4.1056631720391114e-05
+Loss Val:    5.523682193597779e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 4 de 200
+Loss Train:  4.068222823364472e-05
+Loss Val:    5.4795655159978196e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 5 de 200
+Loss Train:  4.030754606541861e-05
+Loss Val:    5.472598422784358e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 6 de 200
+Loss Train:  3.997709844047801e-05
+Loss Val:    5.426895950222388e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 7 de 200
+Loss Train:  3.967426499451131e-05
+Loss Val:    5.420153320301324e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 8 de 200
+Loss Train:  3.9337457215888454e-05
+Loss Val:    5.424016126198694e-05
+Epoca: 9 de 200
+Loss Train:  3.9062545643489965e-05
+Loss Val:    5.418900400400162e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 10 de 200
+Loss Train:  3.9072573756210695e-05
+Loss Val:    5.499625694938004e-05
+Epoca: 11 de 200
+Loss Train:  3.8894148489929e-05
+Loss Val:    5.513007999979891e-05
+Epoca: 12 de 200
+Loss Train:  3.8567402640410364e-05
+Loss Val:    5.461473119794391e-05
+Epoca: 13 de 200
+Loss Train:  3.8210804803318825e-05
+Loss Val:    5.582037556450814e-05
+Epoca: 14 de 200
+Loss Train:  3.8143030112351344e-05
+Loss Val:    5.532087743631564e-05
+Epoca: 15 de 200
+Loss Train:  3.784278721915542e-05
+Loss Val:    5.579835124081001e-05
+Epoca: 16 de 200
+Loss Train:  3.796898806078625e-05
+Loss Val:    5.5033528042258695e-05
+Epoca: 17 de 200
+Loss Train:  3.762896002228121e-05
+Loss Val:    5.795849210699089e-05
+Epoca: 18 de 200
+Loss Train:  3.720543634867619e-05
+Loss Val:    5.623661127174273e-05
+Epoca: 19 de 200
+Loss Train:  3.7275391605751866e-05
+Loss Val:    5.851840978721157e-05
+Warning: We have reached the patience of the early stop criteria
+Stoping the training of the model
+Recovering the most successful version of the model
+My outpath is :  ../experiments/MULTI-UNET_3/
+../experiments/MULTI-UNET_3/
+--------------Indices------------------------
+Training set starts at : 0  and ends at:  5833
+Validation set starts at : 5834  and ends at:  6562
+Testing set starts at:  6563  and ends at:  7292
+.
+.
+--------------Fechas------------------------------
+Training set starts at : 2000-01-01  and ends at:  2016-01-01
+Validation set starts at : 2016-01-02  and ends at:  2017-12-31
+Testing set starts at:  2018-01-01  and ends at:  2019-12-31
+100 140
+Muestras de Train / Valid / Test:  (5834, 729, 730)
+Early stop is enabled
+Epoca: 1 de 200
+Loss Train:  5.904804969812375e-05
+Loss Val:    6.0912399931112304e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 2 de 200
+Loss Train:  4.2265959588775494e-05
+Loss Val:    5.808409332530573e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 3 de 200
+Loss Train:  4.154658260237539e-05
+Loss Val:    5.697093001799658e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 4 de 200
+Loss Train:  4.101342359404791e-05
+Loss Val:    5.589861757471226e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 5 de 200
+Loss Train:  4.060242771199589e-05
+Loss Val:    5.520051490748301e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 6 de 200
+Loss Train:  4.026152493425698e-05
+Loss Val:    5.4779393394710496e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 7 de 200
+Loss Train:  4.005925297424754e-05
+Loss Val:    5.48936368431896e-05
+Epoca: 8 de 200
+Loss Train:  3.9766330850357444e-05
+Loss Val:    5.522311039385386e-05
+Epoca: 9 de 200
+Loss Train:  3.9677570994514745e-05
+Loss Val:    5.480400795931928e-05
+Epoca: 10 de 200
+Loss Train:  3.9288325818806824e-05
+Loss Val:    5.441665052785538e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 11 de 200
+Loss Train:  3.929406044881968e-05
+Loss Val:    5.5229746067197993e-05
+Epoca: 12 de 200
+Loss Train:  3.9309282540948326e-05
+Loss Val:    5.531103670364246e-05
+Epoca: 13 de 200
+Loss Train:  3.9115680233283466e-05
+Loss Val:    5.513811265700497e-05
+Epoca: 14 de 200
+Loss Train:  3.8766342824651284e-05
+Loss Val:    5.475883881445043e-05
+Epoca: 15 de 200
+Loss Train:  3.895748725987176e-05
+Loss Val:    5.5603199143661186e-05
+Epoca: 16 de 200
+Loss Train:  3.84971503710204e-05
+Loss Val:    5.736190723837353e-05
+Epoca: 17 de 200
+Loss Train:  3.814522953567974e-05
+Loss Val:    6.009979915688746e-05
+Epoca: 18 de 200
+Loss Train:  3.8502456889106835e-05
+Loss Val:    5.689582758350298e-05
+Epoca: 19 de 200
+Loss Train:  3.7934462058078e-05
+Loss Val:    6.150412082206458e-05
+Epoca: 20 de 200
+Loss Train:  3.8196105357226224e-05
+Loss Val:    5.633756154566072e-05
+Warning: We have reached the patience of the early stop criteria
+Stoping the training of the model
+Recovering the most successful version of the model
+My outpath is :  ../experiments/MULTI-UNET_4/
+../experiments/MULTI-UNET_4/
+--------------Indices------------------------
+Training set starts at : 0  and ends at:  5833
+Validation set starts at : 5834  and ends at:  6562
+Testing set starts at:  6563  and ends at:  7292
+.
+.
+--------------Fechas------------------------------
+Training set starts at : 2000-01-01  and ends at:  2016-01-01
+Validation set starts at : 2016-01-02  and ends at:  2017-12-31
+Testing set starts at:  2018-01-01  and ends at:  2019-12-31
+100 140
+Muestras de Train / Valid / Test:  (5834, 729, 730)
+Early stop is enabled
+Epoca: 1 de 200
+Loss Train:  7.21744318312095e-05
+Loss Val:    6.497984577436e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 2 de 200
+Loss Train:  4.445031214728472e-05
+Loss Val:    6.199830386321992e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 3 de 200
+Loss Train:  4.2665404869816084e-05
+Loss Val:    5.9149268054170534e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 4 de 200
+Loss Train:  4.165852494632991e-05
+Loss Val:    5.742171560996212e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 5 de 200
+Loss Train:  4.091784756598191e-05
+Loss Val:    5.594214235316031e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 6 de 200
+Loss Train:  4.0409469846346764e-05
+Loss Val:    5.5254411563510075e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 7 de 200
+Loss Train:  4.0142563671620274e-05
+Loss Val:    5.470840187626891e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 8 de 200
+Loss Train:  4.003708785329427e-05
+Loss Val:    5.498282553162426e-05
+Epoca: 9 de 200
+Loss Train:  3.986111434723208e-05
+Loss Val:    5.455944483401254e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 10 de 200
+Loss Train:  3.9570516494674465e-05
+Loss Val:    5.485770452651195e-05
+Epoca: 11 de 200
+Loss Train:  3.9646144759603575e-05
+Loss Val:    5.509121183422394e-05
+Epoca: 12 de 200
+Loss Train:  3.952604624625926e-05
+Loss Val:    5.502511339727789e-05
+Epoca: 13 de 200
+Loss Train:  3.91706883930641e-05
+Loss Val:    5.403673276305199e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 14 de 200
+Loss Train:  3.907586718953584e-05
+Loss Val:    5.4176034609554335e-05
+Epoca: 15 de 200
+Loss Train:  3.879586960518481e-05
+Loss Val:    5.436306673800573e-05
+Epoca: 16 de 200
+Loss Train:  3.8584969202362764e-05
+Loss Val:    5.424839037004858e-05
+Epoca: 17 de 200
+Loss Train:  3.8703240361755515e-05
+Loss Val:    5.397700078901835e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 18 de 200
+Loss Train:  3.8420608169037396e-05
+Loss Val:    5.487234011525288e-05
+Epoca: 19 de 200
+Loss Train:  3.830496157346815e-05
+Loss Val:    5.6951139413286e-05
+Epoca: 20 de 200
+Loss Train:  3.8280454515727314e-05
+Loss Val:    5.852613685419783e-05
+Epoca: 21 de 200
+Loss Train:  3.807812434299555e-05
+Loss Val:    5.723363938159309e-05
+Epoca: 22 de 200
+Loss Train:  3.760086821258695e-05
+Loss Val:    5.896927177673206e-05
+Epoca: 23 de 200
+Loss Train:  3.777176125632737e-05
+Loss Val:    5.597506242338568e-05
+Epoca: 24 de 200
+Loss Train:  3.7502258128105405e-05
+Loss Val:    5.579048229265027e-05
+Epoca: 25 de 200
+Loss Train:  3.7029362995202074e-05
+Loss Val:    5.6814136769389734e-05
+Epoca: 26 de 200
+Loss Train:  3.736398691157712e-05
+Loss Val:    5.557497206609696e-05
+Epoca: 27 de 200
+Loss Train:  3.7607220942362964e-05
+Loss Val:    5.821970626129769e-05
+Warning: We have reached the patience of the early stop criteria
+Stoping the training of the model
+Recovering the most successful version of the model
+My outpath is :  ../experiments/MULTI-UNET_5/
+../experiments/MULTI-UNET_5/
+--------------Indices------------------------
+Training set starts at : 0  and ends at:  5833
+Validation set starts at : 5834  and ends at:  6562
+Testing set starts at:  6563  and ends at:  7292
+.
+.
+--------------Fechas------------------------------
+Training set starts at : 2000-01-01  and ends at:  2016-01-01
+Validation set starts at : 2016-01-02  and ends at:  2017-12-31
+Testing set starts at:  2018-01-01  and ends at:  2019-12-31
+100 140
+Muestras de Train / Valid / Test:  (5834, 729, 730)
+Early stop is enabled
+Epoca: 1 de 200
+Loss Train:  0.0001136208082918018
+Loss Val:    6.189521809574217e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 2 de 200
+Loss Train:  4.299678976214063e-05
+Loss Val:    5.9346784837543964e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 3 de 200
+Loss Train:  4.205767826127232e-05
+Loss Val:    5.7570105127524585e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 4 de 200
+Loss Train:  4.1449571377264474e-05
+Loss Val:    5.677410081261769e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 5 de 200
+Loss Train:  4.103293795298033e-05
+Loss Val:    5.5976081057451665e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 6 de 200
+Loss Train:  4.071339822815713e-05
+Loss Val:    5.549349225475453e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 7 de 200
+Loss Train:  4.043004502417006e-05
+Loss Val:    5.4911452025407925e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 8 de 200
+Loss Train:  4.0165894913119174e-05
+Loss Val:    5.464071000460535e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 9 de 200
+Loss Train:  3.990474579430231e-05
+Loss Val:    5.443955524242483e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 10 de 200
+Loss Train:  3.962638916654563e-05
+Loss Val:    5.490432886290364e-05
+Epoca: 11 de 200
+Loss Train:  3.9539895780454535e-05
+Loss Val:    5.480682375491597e-05
+Epoca: 12 de 200
+Loss Train:  3.93143104417959e-05
+Loss Val:    5.670379687217064e-05
+Epoca: 13 de 200
+Loss Train:  3.9041029758866535e-05
+Loss Val:    5.609863001154736e-05
+Epoca: 14 de 200
+Loss Train:  3.89091242074961e-05
+Loss Val:    5.521374987438321e-05
+Epoca: 15 de 200
+Loss Train:  3.986947667485391e-05
+Loss Val:    5.657041765516624e-05
+Epoca: 16 de 200
+Loss Train:  3.895202597934806e-05
+Loss Val:    5.6658122048247606e-05
+Epoca: 17 de 200
+Loss Train:  3.866946045500548e-05
+Loss Val:    5.722139758290723e-05
+Epoca: 18 de 200
+Loss Train:  3.865253264527619e-05
+Loss Val:    5.588667409028858e-05
+Epoca: 19 de 200
+Loss Train:  3.843158150215932e-05
+Loss Val:    5.621102900477126e-05
+Warning: We have reached the patience of the early stop criteria
+Stoping the training of the model
+Recovering the most successful version of the model
+My outpath is :  ../experiments/MULTI-UNET_6/
+../experiments/MULTI-UNET_6/
+--------------Indices------------------------
+Training set starts at : 0  and ends at:  5833
+Validation set starts at : 5834  and ends at:  6562
+Testing set starts at:  6563  and ends at:  7292
+.
+.
+--------------Fechas------------------------------
+Training set starts at : 2000-01-01  and ends at:  2016-01-01
+Validation set starts at : 2016-01-02  and ends at:  2017-12-31
+Testing set starts at:  2018-01-01  and ends at:  2019-12-31
+100 140
+Muestras de Train / Valid / Test:  (5834, 729, 730)
+Early stop is enabled
+Epoca: 1 de 200
+Loss Train:  7.025175631815105e-05
+Loss Val:    6.391174247255549e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 2 de 200
+Loss Train:  4.2956022051472146e-05
+Loss Val:    6.0259830206632614e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 3 de 200
+Loss Train:  4.1687655202747e-05
+Loss Val:    5.8092980907531455e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 4 de 200
+Loss Train:  4.1184060113172473e-05
+Loss Val:    5.5843287555035204e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 5 de 200
+Loss Train:  4.080369101785274e-05
+Loss Val:    5.502013300429098e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 6 de 200
+Loss Train:  4.0533031070770895e-05
+Loss Val:    5.461525870487094e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 7 de 200
+Loss Train:  4.027725125126057e-05
+Loss Val:    5.484064240590669e-05
+Epoca: 8 de 200
+Loss Train:  4.020587812659595e-05
+Loss Val:    5.43804417247884e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 9 de 200
+Loss Train:  4.000599132111397e-05
+Loss Val:    5.440358290798031e-05
+Epoca: 10 de 200
+Loss Train:  3.953929665081974e-05
+Loss Val:    5.4384046961786225e-05
+Epoca: 11 de 200
+Loss Train:  3.963831562986941e-05
+Loss Val:    5.438949301606044e-05
+Epoca: 12 de 200
+Loss Train:  3.9387452066838615e-05
+Loss Val:    5.450122625916265e-05
+Epoca: 13 de 200
+Loss Train:  3.9504305771341223e-05
+Loss Val:    5.4636904678773135e-05
+Epoca: 14 de 200
+Loss Train:  3.9437626101871874e-05
+Loss Val:    5.4626572818960994e-05
+Epoca: 15 de 200
+Loss Train:  3.897480668065514e-05
+Loss Val:    5.505080480361357e-05
+Epoca: 16 de 200
+Loss Train:  3.939773601465675e-05
+Loss Val:    5.445015267468989e-05
+Epoca: 17 de 200
+Loss Train:  3.9081391772603874e-05
+Loss Val:    5.4826254199724644e-05
+Epoca: 18 de 200
+Loss Train:  3.913758711341684e-05
+Loss Val:    5.445408896775916e-05
+Epoca: 19 de 200
+Loss Train:  3.892212427325058e-05
+Loss Val:    5.5077434808481485e-05
+Epoca: 20 de 200
+Loss Train:  3.953131112615204e-05
+Loss Val:    5.4062365961726755e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 21 de 200
+Loss Train:  3.856683082209164e-05
+Loss Val:    5.485276778927073e-05
+Epoca: 22 de 200
+Loss Train:  3.8196695050853486e-05
+Loss Val:    5.58042484044563e-05
+Epoca: 23 de 200
+Loss Train:  3.800982535792223e-05
+Loss Val:    5.582719313679263e-05
+Epoca: 24 de 200
+Loss Train:  3.9306662881621724e-05
+Loss Val:    5.622083699563518e-05
+Epoca: 25 de 200
+Loss Train:  3.839695647587938e-05
+Loss Val:    5.767155016656034e-05
+Epoca: 26 de 200
+Loss Train:  3.7874288260005814e-05
+Loss Val:    5.811173468828201e-05
+Epoca: 27 de 200
+Loss Train:  3.749592708565104e-05
+Loss Val:    5.782809967058711e-05
+Epoca: 28 de 200
+Loss Train:  3.703204750897621e-05
+Loss Val:    5.9015255828853697e-05
+Epoca: 29 de 200
+Loss Train:  3.709795704511859e-05
+Loss Val:    5.8071076637133956e-05
+Epoca: 30 de 200
+Loss Train:  3.674844073545239e-05
+Loss Val:    6.080730599933304e-05
+Warning: We have reached the patience of the early stop criteria
+Stoping the training of the model
+Recovering the most successful version of the model
+My outpath is :  ../experiments/MULTI-UNET_7/
+../experiments/MULTI-UNET_7/
+--------------Indices------------------------
+Training set starts at : 0  and ends at:  5833
+Validation set starts at : 5834  and ends at:  6562
+Testing set starts at:  6563  and ends at:  7292
+.
+.
+--------------Fechas------------------------------
+Training set starts at : 2000-01-01  and ends at:  2016-01-01
+Validation set starts at : 2016-01-02  and ends at:  2017-12-31
+Testing set starts at:  2018-01-01  and ends at:  2019-12-31
+100 140
+Muestras de Train / Valid / Test:  (5834, 729, 730)
+Early stop is enabled
+Epoca: 1 de 200
+Loss Train:  5.6307746769113555e-05
+Loss Val:    6.17043551756069e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 2 de 200
+Loss Train:  4.2550415861887194e-05
+Loss Val:    5.738653271691874e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 3 de 200
+Loss Train:  4.142969894917782e-05
+Loss Val:    5.560904901358299e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 4 de 200
+Loss Train:  4.091726602899592e-05
+Loss Val:    5.50317854504101e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 5 de 200
+Loss Train:  4.0524838555465476e-05
+Loss Val:    5.454104029922746e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 6 de 200
+Loss Train:  4.021259776078445e-05
+Loss Val:    5.4264997743302956e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 7 de 200
+Loss Train:  3.993158097237589e-05
+Loss Val:    5.41568297194317e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 8 de 200
+Loss Train:  3.9741010482430283e-05
+Loss Val:    5.4111187637317926e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 9 de 200
+Loss Train:  3.981126470707812e-05
+Loss Val:    5.4233521950664e-05
+Epoca: 10 de 200
+Loss Train:  3.9457047145713486e-05
+Loss Val:    5.41954577784054e-05
+Epoca: 11 de 200
+Loss Train:  3.91422906143237e-05
+Loss Val:    5.393204264692031e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 12 de 200
+Loss Train:  3.906684536885111e-05
+Loss Val:    5.450939352158457e-05
+Epoca: 13 de 200
+Loss Train:  3.8800134585590185e-05
+Loss Val:    5.4960048146313056e-05
+Epoca: 14 de 200
+Loss Train:  3.867804889445673e-05
+Loss Val:    5.433466867543757e-05
+Epoca: 15 de 200
+Loss Train:  3.8501852506906535e-05
+Loss Val:    5.4528991313418373e-05
+Epoca: 16 de 200
+Loss Train:  3.828269793741926e-05
+Loss Val:    5.537650577025488e-05
+Epoca: 17 de 200
+Loss Train:  3.841448805693688e-05
+Loss Val:    5.466678339871578e-05
+Epoca: 18 de 200
+Loss Train:  3.828932653297907e-05
+Loss Val:    5.500792394741438e-05
+Epoca: 19 de 200
+Loss Train:  3.773373026115846e-05
+Loss Val:    5.6309334468096495e-05
+Epoca: 20 de 200
+Loss Train:  3.746313244432277e-05
+Loss Val:    5.5372522183461115e-05
+Epoca: 21 de 200
+Loss Train:  3.7280001279198477e-05
+Loss Val:    5.553165101446211e-05
+Warning: We have reached the patience of the early stop criteria
+Stoping the training of the model
+Recovering the most successful version of the model
+My outpath is :  ../experiments/MULTI-UNET_8/
+../experiments/MULTI-UNET_8/
+--------------Indices------------------------
+Training set starts at : 0  and ends at:  5833
+Validation set starts at : 5834  and ends at:  6562
+Testing set starts at:  6563  and ends at:  7292
+.
+.
+--------------Fechas------------------------------
+Training set starts at : 2000-01-01  and ends at:  2016-01-01
+Validation set starts at : 2016-01-02  and ends at:  2017-12-31
+Testing set starts at:  2018-01-01  and ends at:  2019-12-31
+100 140
+Muestras de Train / Valid / Test:  (5834, 729, 730)
+Early stop is enabled
+Epoca: 1 de 200
+Loss Train:  7.385625835081866e-05
+Loss Val:    6.172717257868499e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 2 de 200
+Loss Train:  4.3273515629688555e-05
+Loss Val:    5.907525701331906e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 3 de 200
+Loss Train:  4.226339534399551e-05
+Loss Val:    5.7528148317942396e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 4 de 200
+Loss Train:  4.1577069884456314e-05
+Loss Val:    5.640972449327819e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 5 de 200
+Loss Train:  4.107697571953395e-05
+Loss Val:    5.598033021669835e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 6 de 200
+Loss Train:  4.0641059457226366e-05
+Loss Val:    5.583259553532116e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 7 de 200
+Loss Train:  4.030089126075998e-05
+Loss Val:    5.594211324932985e-05
+Epoca: 8 de 200
+Loss Train:  4.003085241991307e-05
+Loss Val:    5.521178900380619e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 9 de 200
+Loss Train:  3.977875363615293e-05
+Loss Val:    5.4962474678177387e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 10 de 200
+Loss Train:  3.952546725788299e-05
+Loss Val:    5.526740642380901e-05
+Epoca: 11 de 200
+Loss Train:  3.931061390881664e-05
+Loss Val:    5.4923548304941505e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 12 de 200
+Loss Train:  3.957322588055906e-05
+Loss Val:    5.4446391004603356e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 13 de 200
+Loss Train:  3.932391073731944e-05
+Loss Val:    5.433236583485268e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 14 de 200
+Loss Train:  3.884970525459659e-05
+Loss Val:    5.441864414024167e-05
+Epoca: 15 de 200
+Loss Train:  3.8617392748828434e-05
+Loss Val:    5.461415275931358e-05
+Epoca: 16 de 200
+Loss Train:  3.860985941122174e-05
+Loss Val:    5.563347804127261e-05
+Epoca: 17 de 200
+Loss Train:  3.827325058729027e-05
+Loss Val:    5.599092764896341e-05
+Epoca: 18 de 200
+Loss Train:  3.805434929105316e-05
+Loss Val:    5.504098953679204e-05
+Epoca: 19 de 200
+Loss Train:  3.791818442064826e-05
+Loss Val:    5.542825965676457e-05
+Epoca: 20 de 200
+Loss Train:  3.8110358963350546e-05
+Loss Val:    5.4475938668474555e-05
+Epoca: 21 de 200
+Loss Train:  3.769641404433869e-05
+Loss Val:    5.644906923407689e-05
+Epoca: 22 de 200
+Loss Train:  3.776385470274201e-05
+Loss Val:    5.512172356247902e-05
+Epoca: 23 de 200
+Loss Train:  3.835542891781736e-05
+Loss Val:    5.689658428309485e-05
+Epoca: 24 de 200
+Loss Train:  3.776048629839813e-05
+Loss Val:    5.741847780882381e-05
+Epoca: 25 de 200
+Loss Train:  3.7343676552058095e-05
+Loss Val:    5.654973574564792e-05
+Warning: We have reached the patience of the early stop criteria
+Stoping the training of the model
+Recovering the most successful version of the model
+My outpath is :  ../experiments/MULTI-UNET_9/
+../experiments/MULTI-UNET_9/
+--------------Indices------------------------
+Training set starts at : 0  and ends at:  5833
+Validation set starts at : 5834  and ends at:  6562
+Testing set starts at:  6563  and ends at:  7292
+.
+.
+--------------Fechas------------------------------
+Training set starts at : 2000-01-01  and ends at:  2016-01-01
+Validation set starts at : 2016-01-02  and ends at:  2017-12-31
+Testing set starts at:  2018-01-01  and ends at:  2019-12-31
+100 140
+Muestras de Train / Valid / Test:  (5834, 729, 730)
+Early stop is enabled
+Epoca: 1 de 200
+Loss Train:  4.6521332414102616e-05
+Loss Val:    5.907584636588581e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 2 de 200
+Loss Train:  4.187877744022307e-05
+Loss Val:    5.6522974773542956e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 3 de 200
+Loss Train:  4.105849480043143e-05
+Loss Val:    5.5725162383168936e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 4 de 200
+Loss Train:  4.067636554397461e-05
+Loss Val:    5.511994822882116e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 5 de 200
+Loss Train:  4.04605464291152e-05
+Loss Val:    5.4677482694387436e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 6 de 200
+Loss Train:  4.018094645240961e-05
+Loss Val:    5.4692958656232804e-05
+Epoca: 7 de 200
+Loss Train:  3.9814099208053e-05
+Loss Val:    5.455797872855328e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 8 de 200
+Loss Train:  3.9581354871786544e-05
+Loss Val:    5.494005017681047e-05
+Epoca: 9 de 200
+Loss Train:  3.9344288343770994e-05
+Loss Val:    5.4380943765863776e-05
+The validation loss is the minimum reached so far.
+Saving the current version of the model as the BestModel.
+Epoca: 10 de 200
+Loss Train:  3.90849190617009e-05
+Loss Val:    5.5734020861564204e-05
+Epoca: 11 de 200
+Loss Train:  3.892580934137946e-05
+Loss Val:    5.4779782658442855e-05
+Epoca: 12 de 200
+Loss Train:  3.870928331280831e-05
+Loss Val:    5.6438213505316526e-05
+Epoca: 13 de 200
+Loss Train:  3.841494200575454e-05
+Loss Val:    5.6368000514339656e-05
+Epoca: 14 de 200
+Loss Train:  3.830560807469513e-05
+Loss Val:    5.64231195312459e-05
+Epoca: 15 de 200
+Loss Train:  3.811207364858453e-05
+Loss Val:    5.570876965066418e-05
+Epoca: 16 de 200
+Loss Train:  3.780527196821922e-05
+Loss Val:    5.504968066816218e-05
+Epoca: 17 de 200
+Loss Train:  3.8192832723141645e-05
+Loss Val:    5.608938226941973e-05
+Epoca: 18 de 200
+Loss Train:  3.7686205024322726e-05
+Loss Val:    5.4963904403848574e-05
+Epoca: 19 de 200
+Loss Train:  3.75726659354949e-05
+Loss Val:    5.679967216565274e-05
+Warning: We have reached the patience of the early stop criteria
+Stoping the training of the model
+Recovering the most successful version of the model

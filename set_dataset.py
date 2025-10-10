@@ -10,8 +10,13 @@ class set_up_data(Dataset):
 #    "Para utilizarse con el DataLoader de PyTorch"
     def __init__(self , Data , Input, Target):
         self.x_data = Input
-
         self.y_data = Target
+        
+        if len(self.x_data.shape)==3 :
+            self.x_data = self.x_data[:,np.newaxis,:,:]  #Agrego una dimension de canales
+        if len(self.y_data.shape)==3 :
+            self.y_data = self.y_data[:,np.newaxis,:,:]  #Agrego una dimension de canales
+        
        #Parametros para la normalizacion
         self.xmin, self.xmax = Data["XMin"], Data["XMax"]
         self.ymin, self.ymax = Data["YMin"], Data["YMax"]

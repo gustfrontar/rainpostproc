@@ -41,7 +41,7 @@ TrainConf['ModelConf']['BatchNorm'] = False
 TrainConf['EarlyStop'] = False                  #If early stop is activated or not
 TrainConf['Patience'] = 5                       #How many increasing loss epochs we will wait until interrupting the training. 
 TrainConf['MinDelta'] = 0.5                     #How big an improvement in the loss will be tolerated before considering it a degradation of the loss [%]
-
+TrainConf['TempFix'] = False                     #Temporal fix for data size difference among experiments.
    
 
 

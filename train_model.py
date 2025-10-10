@@ -3,30 +3,31 @@ import plots
 import models
 import set_dataset as ds
 import pickle
-import train_utils as tu
+import train_utils_hsinn as tu
 import os
+import default_conf as dc
+TrainConf = dc.TrainConf #Get default configuration.
 
-#Una forma de identificar la configuración que utilizamos
-TrainConf=dict()  #Guardamos todos los hyperparametros en un diccionario.
 
 #Exp type
 TrainConf['ModelClass'] = models.EncoderDecoder  #Determino el modelo a utilizar.
 TrainConf['ExpName']    = 'ENCODECO-TEST'
 TrainConf['ExpNumber']  = 0
+TrainConf['TempFix'] = False                     #Temporal fix for data size difference among experiments.
 
 #Hiperparametros
 TrainConf['RandomSeed']=1029
-TrainConf['BatchSize']= 100
-TrainConf['MaxEpochs']= 40
+TrainConf['BatchSize']= 20
+TrainConf['MaxEpochs']= 60
 TrainConf['LearningRate']= 1.0e-4
 TrainConf['LrDecay']=True
-TrainConf['Milestones']=[20]
-TrainConf['Gamma']=0.1
+TrainConf['Milestones']=[10]
+TrainConf['Gamma']=0.08
 TrainConf['LossType']="MSE"
-TrainConf['WeightDecay']=1.0e-6
+TrainConf['WeightDecay']=0.0e-6
 
 #Paths
-TrainConf['OutPath']  ="./salidas/"
+TrainConf['OutPath']  ="../experiments/"
 
 #Data
 TrainConf['DataPath'] ="../data/medios.npz"
@@ -42,12 +43,14 @@ TrainConf['ModelConf']=dict()
 TrainConf['ModelConf']['KernelSize'] =  5           #Convolutional kernel size.
 TrainConf['ModelConf']['Pool']       =  2           #Pooling kernel size 
 TrainConf['ModelConf']['DecoType'] = 'bilinear'     #conv, bilinear, bicubic, nearest  (up sample operation type)
-TrainConf['ModelConf']['Channels'] = [1,32,32,64,128,64,1]  #Number of channels for each convolutional layer.
+TrainConf['ModelConf']['Channels'] = [1,16,16,32,64,128,64,32,16,1]  #Number of channels for each convolutional layer.
 TrainConf['ModelConf']['InActivation'] = 'ReLU'             #Activation function of the hidden layers.
 TrainConf['ModelConf']['OutActivation'] = 'SiLU'            #Activation function of the output layer.
 TrainConf['ModelConf']['Bias']=[True]                       #Bias parameter. 
+TrainConf['ModelConf']['EnableHSiNNEpoch']=[20]             #At which epoch will High Order Statistics-informed Neural Networks be enabled.
 
-OutPath = "./salidas/"+ TrainConf['ExpName'] +"_"+str(TrainConf['ExpNumber'])+"/"
+
+OutPath = "../experiments/"+ TrainConf['ExpName'] +"_"+str(TrainConf['ExpNumber'])+"/"
 print(OutPath)
 if not os.path.exists( OutPath ):
        # Creo un nuevo directorio si no existe (para guardar las imagenes y datos)
@@ -73,7 +76,7 @@ models.save_model( TrainedModel , OutPath )
 with open( OutPath + '/ModelStats.pkl', 'wb' ) as handle:
     pickle.dump( ModelStats , handle , protocol=pickle.HIGHEST_PROTOCOL )   
 #Save Configuration
-with open( OutPath + '/ExpConf.pkl', 'wb' ) as handle:
+with open( OutPath + '/TrainConf.pkl', 'wb' ) as handle:
     pickle.dump( TrainConf , handle , protocol=pickle.HIGHEST_PROTOCOL )   
 
 #Plot basic training statistics

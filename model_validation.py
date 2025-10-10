@@ -8,7 +8,7 @@ import train_utils as tu
 
 ExpConf = dict()
 #Exp type
-ExpConf['ExpName']    = '/EARLY_STOP/UNET_MEDIOS/MULTI-UNET'
+ExpConf['ExpName']    = '/ENCODECO-TEST'
 ExpConf['ExpNumber']  = 0
 ExpConf['ExpPath'] = "../experiments/"+ ExpConf['ExpName'] +"_"+str(ExpConf['ExpNumber'])+"/"
 #Validation parameters
@@ -23,7 +23,7 @@ ValConf['NumExtreme']  = 10
 with open( ExpConf['ExpPath'] + 'TrainConf.pkl', 'rb') as handle:
     Conf = pickle.load(handle)
 
-Conf['TempFix'] = True #This is a temporal fix to fix a small change in the size of the data among experiments.
+Conf['TempFix'] = False #This is a temporal fix to fix a small change in the size of the data among experiments.
 
 #Obtenemos el modelo
 TrainedModel = models.load_model( ExpConf['ExpPath'] )  

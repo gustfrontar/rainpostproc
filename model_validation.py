@@ -8,8 +8,8 @@ import train_utils as tu
 
 ExpConf = dict()
 #Exp type
-ExpConf['ExpName']    = '/ENCODECO-TEST'
-ExpConf['ExpNumber']  = 0
+ExpConf['ExpName']    = '/UNET-FOURIER'
+ExpConf['ExpNumber']  = 1
 ExpConf['ExpPath'] = "../experiments/"+ ExpConf['ExpName'] +"_"+str(ExpConf['ExpNumber'])+"/"
 #Validation parameters
 ValConf = dict()
@@ -33,9 +33,10 @@ Data = ds.get_data( Conf )
 
 #Aplicamos el modelo al conjunto de testing
 minput , target , output = tu.model_eval( TrainedModel , Data['TestDataSet'] , denorm = True )
-output=output.detach().numpy()
-target=target.detach().numpy()
-minput = minput.detach().numpy()
+output=output.detach().numpy().squeeze()
+target=target.detach().numpy().squeeze()
+minput = minput.detach().numpy().squeeze()
+
 
 print( np.max( output ) , np.min( output ) , np.mean( output ))
 
@@ -47,9 +48,12 @@ plots.PlotCatInd( CmInd , ExpConf['ExpPath'] )
 #Plot the most extreme cases
 mtarget = np.mean( np.mean( target , 2 ) , 1 )                      #Compute the mean precipitation
 sortind = np.flip( np.argsort( mtarget ) )[0:ValConf['NumExtreme']] #Select the Nth most extreme cases (based on the mean precipitation)
+
+
 eoutput = output[sortind,:,:]
 einput  = minput[sortind,:,:]
 etarget = target[sortind,:,:]
+
 plots.PlotCases( einput , etarget , eoutput , ExpConf['ExpPath'] )
 
 

@@ -360,7 +360,6 @@ class unet(torch.nn.Module):
         self.enco_3 = unet_conv_block( self.ch_2 , self.ch_3 , kernel_size = self.kernel_size , padding = self.padding , act_type = self.act_type , bias = self.bias , batchnorm = self.batchnorm , pool=self.pool )
         self.enco_4 = unet_conv_block( self.ch_3 , self.ch_4 , kernel_size = self.kernel_size , padding = self.padding , act_type = self.act_type , bias = self.bias , batchnorm = self.batchnorm , pool=self.pool )
         self.enco_5 = unet_conv_block( self.ch_4 , self.ch_5 , kernel_size = self.kernel_size , padding = self.padding , act_type = self.act_type , bias = self.bias , batchnorm = self.batchnorm , pool=self.pool )
-
         self.deco_4 = unet_conv_block( self.ch_5 , self.ch_4 , kernel_size = self.kernel_size , padding = self.padding , act_type = self.act_type , bias = self.bias , batchnorm = self.batchnorm , pool=1 ) 
         self.deco_3 = unet_conv_block( self.ch_4 , self.ch_3 , kernel_size = self.kernel_size , padding = self.padding , act_type = self.act_type , bias = self.bias , batchnorm = self.batchnorm , pool=1 )
         self.deco_2 = unet_conv_block( self.ch_3 , self.ch_2 , kernel_size = self.kernel_size , padding = self.padding , act_type = self.act_type , bias = self.bias , batchnorm = self.batchnorm , pool=1 )
@@ -401,5 +400,133 @@ class unet(torch.nn.Module):
         x = self.out_act( self.out( x ) )
 
         return x.view(batch,self.nx,self.ny)
+
+
+
+
+class vae_unet(torch.nn.Module):
+    def __init__(self, model_conf ):
+        super().__init__()
+        self.nx = model_conf['Nx']
+        self.ny = model_conf['Ny']
+        if 'InActivation' in model_conf.keys() :
+           self.act_type = model_conf['InActivation']
+        else :
+           self.act_type = 'ReLU'
+        if 'OutActivation' in model_conf.keys() :
+           self.out_act_type = model_conf['OutActivation']
+        else :
+           self.out_act_type = 'Identity'
+        if 'DecoType' in model_conf.keys() :
+           self.decotype = model_conf['DecoType']
+        else :
+           self.decotype = 'bilinear'
+        if 'Pool' in model_conf.keys() :
+           self.pool = model_conf['Pool']
+        else :
+           self.pool = 2
+        if 'KernelSize' in model_conf.keys() :
+           self.kernel_size = model_conf['KernelSize']
+        else :
+           self.kernel_size = 3
+        if 'Bias' in model_conf.keys() :
+           self.bias = model_conf['Bias']
+        else :
+           self.bias = False
+        if 'BatchNorm' in model_conf.keys() :
+           self.batchnorm = model_conf['BatchNorm']
+        else :
+           self.batchnorm = False
+        if 'Channels' in model_conf.keys() :
+           self.channels = model_conf['Channels']
+        else :
+           self.channels = 64
+        if 'LatentDim' in model_conf.keys() :
+            self.latent_dim = model_conf['LatentDim']
+        else :
+            self.latent_dim = 32
+
+        self.padding = int( ( self.kernel_size  - 1 ) / 2 )
+        exec('self.act     = torch.nn.' + self.act_type + '()' )
+        exec('self.out_act = torch.nn.' + self.out_act_type + '()' )
+
+        #Channels at the different depths are a function of channels defined for the first layer.
+        self.ch_1 = self.channels
+        self.ch_2 = self.channels * 2
+        self.ch_3 = self.channels * 4
+        self.ch_4 = self.channels * 8
+        self.ch_5 = self.channels * 16
+
+
+        #Pooling is performed at the beginning of the conv block so the first conv_block should not perform any pooling (pool = 1)
+        self.enco_1 = unet_conv_block( 1         , self.ch_1 , kernel_size = self.kernel_size , padding = self.padding , act_type = self.act_type , bias = self.bias , batchnorm = self.batchnorm , pool=1 )
+        self.enco_2 = unet_conv_block( self.ch_1 , self.ch_2 , kernel_size = self.kernel_size , padding = self.padding , act_type = self.act_type , bias = self.bias , batchnorm = self.batchnorm , pool=self.pool )
+        self.enco_3 = unet_conv_block( self.ch_2 , self.ch_3 , kernel_size = self.kernel_size , padding = self.padding , act_type = self.act_type , bias = self.bias , batchnorm = self.batchnorm , pool=self.pool )
+        self.enco_4 = unet_conv_block( self.ch_3 , self.ch_4 , kernel_size = self.kernel_size , padding = self.padding , act_type = self.act_type , bias = self.bias , batchnorm = self.batchnorm , pool=self.pool )
+        self.enco_5 = unet_conv_block( self.ch_4 , self.ch_5 , kernel_size = self.kernel_size , padding = self.padding , act_type = self.act_type , bias = self.bias , batchnorm = self.batchnorm , pool=self.pool )
+        self.deco_4 = unet_conv_block( self.ch_5 , self.ch_4 , kernel_size = self.kernel_size , padding = self.padding , act_type = self.act_type , bias = self.bias , batchnorm = self.batchnorm , pool=1 )
+        self.deco_3 = unet_conv_block( self.ch_4 , self.ch_3 , kernel_size = self.kernel_size , padding = self.padding , act_type = self.act_type , bias = self.bias , batchnorm = self.batchnorm , pool=1 )
+        self.deco_2 = unet_conv_block( self.ch_3 , self.ch_2 , kernel_size = self.kernel_size , padding = self.padding , act_type = self.act_type , bias = self.bias , batchnorm = self.batchnorm , pool=1 )
+        self.deco_1 = unet_conv_block( self.ch_2 , self.ch_1 , kernel_size = self.kernel_size , padding = self.padding , act_type = self.act_type , bias = self.bias , batchnorm = self.batchnorm , pool=1 )
+
+        self.nx_1 = self.nx ; self.ny_1 = self.ny
+        self.nx_2 = int( self.nx_1 / self.pool ) ; self.ny_2 = int( self.ny_1 / self.pool )
+        self.nx_3 = int( self.nx_2 / self.pool ) ; self.ny_3 = int( self.ny_2 / self.pool )
+        self.nx_4 = int( self.nx_3 / self.pool ) ; self.ny_4 = int( self.ny_3 / self.pool )
+        self.nx_5 = int( self.nx_4 / self.pool ) ; self.ny_5 = int( self.ny_4 / self.pool )
+
+        self.nflat_bottleneck = self.ch_5 * self.nx_5 * self.ny_5                    #Size of the bottleneck before entering the fully connected layer. 
+
+        self.mu_layer = nn.linear( self.nflat_bottleneck , self.latent_dim )         #From bottleneck to mu
+        self.logvar_layer = nn.linear( self.nflat_bottleneck , self.latent_dim )     #From bottleneck to logvar
+   
+        self.latent_decode = nn.linear( self.latent_dim , self.nflat_bottleneck )    #From lattent space to bottleneck.
+
+        #Upsample convolutions layers uses a kernel_size of 1 in the original implementation of the U-NET.
+        self.up_1 = unet_up_block( self.nx_1 , self.ny_1 , self.ch_1 , kernel_size = 1 , upstype = self.decotype , padding = self.padding , act_type = self.act_type , bias = self.bias , batchnorm = self.batchnorm )
+        self.up_2 = unet_up_block( self.nx_2 , self.ny_2 , self.ch_2 , kernel_size = 1 , upstype = self.decotype , padding = self.padding , act_type = self.act_type , bias = self.bias , batchnorm = self.batchnorm )
+        self.up_3 = unet_up_block( self.nx_3 , self.ny_3 , self.ch_3 , kernel_size = 1 , upstype = self.decotype , padding = self.padding , act_type = self.act_type , bias = self.bias , batchnorm = self.batchnorm )
+        self.up_4 = unet_up_block( self.nx_4 , self.ny_4 , self.ch_4 , kernel_size = 1 , upstype = self.decotype , padding = self.padding , act_type = self.act_type , bias = self.bias , batchnorm = self.batchnorm )
+
+        self.out = torch.nn.Conv2d( self.ch_1 , 1, kernel_size=self.kernel_size , padding= self.padding , bias = self.bias )
+
+    def reparameterize(self, mu: torch.Tensor, logvar: torch.Tensor) -> torch.Tensor:
+        std = torch.exp(0.5 * logvar)
+        eps = torch.randn_like(std)
+        return mu + eps * std
+
+
+    def forward(self, x ):
+        batch = x.shape[0]
+        x = x.view(batch,1,self.nx,self.ny) # x - Shape 4D: (batch size, filtros, nx, ny)
+        #Encoding
+        x_1 = self.enco_1( x   )
+        x_2 = self.enco_2( x_1 )
+        x_3 = self.enco_3( x_2 )
+        x_4 = self.enco_4( x_3 )
+        x   = self.enco_5( x_4 ) #This is the bottleneck
+
+        #From the bottleneck (x) obtain the mu and sigma of the latent space variable z.
+        x   = x.view( batch , -1 )  #Flatten all dimensions but not the batch dimension. 
+        mu     = self.mu_layer( x )
+        logvar = self.logvar_layer( x )
+        z = self.reparametrize( mu , logvar )  #Randomly sample from the multivariate Gaussian in the latent space.
+        x = self.latent_decode( z )            #Expand from the lattent dim to the size of the bottleneck.
+        x = x.view( batch , self.ch_5 , self.nx_5 , self.ny_5 )  #Reconstruct the shape of the bottleneck. 
+
+        #Now continue with the decoding as usual.
+        #Decoding
+        x = self.up_4( x , x_4 )
+        x = self.deco_4( x )
+        x = self.up_3( x , x_3 )
+        x = self.deco_3( x )
+        x = self.up_2( x , x_2 )
+        x = self.deco_2( x )
+        x = self.up_1( x , x_1 )
+        x = self.deco_1( x )
+        #Output layer
+        x = self.out_act( self.out( x ) )
+
+        return x.view(batch,self.nx,self.ny) , mu , logvar
 
 

@@ -17,9 +17,9 @@ TrainConf['TempFix'] = False                     #Temporal fix for data size dif
 
 #Hiperparametros
 TrainConf['RandomSeed']=1029
-TrainConf['BatchSize']= 20
+TrainConf['BatchSize']= 10
 TrainConf['MaxEpochs']= 100
-TrainConf['LearningRate']=2.5e-4
+TrainConf['LearningRate']=1.0e-4
 
 #Paths
 TrainConf['OutPath']  ="../experiments/"
@@ -32,36 +32,39 @@ TrainConf['TrainRatio']     =  0.8
 TrainConf['ValRatio']       =  0.1
 TrainConf['TestRatio']      =  0.1
 TrainConf['DateFileName']   =  'files'
-TrainConf['LambdaKL']       = 1.0  #Weight of the KL loss term.
-TrainConf['LambdaMSE']      = 1.0  #Weigth of the MSE loss term.
-TrainConf['FreeBits']       = 1.0  #Number of free bits for KL loss term.
-TrainConf['LambdaVar']      = 0.0  #Weight for variance loss term.
-TrainConf['LambdaSkew']     = 0.0  #Weight for skewness loss term.
-TrainConf['LambdaKurt']     = 0.0  #Weight for kurtosis loss term.
-TrainConf['LambdaFourier']  = 0.0  #Weight for fourier loss term.
-TrainConf['LambdaRandomFourier'] = 0.0 #Weigth for the random fourier loss term.  
-TrainConf['WeigthedLossFlag']   = False  #[bool] Wether to use a weighted MSE loss or not.
-TrainConf['FourierLossFlag']    = False  #[bool] Wether to use a fourier loss term or not.
-TrainConf['RandomFourierLossFlag'] = False #[bool] Wether to use a random fourier loss. 
-TrainConf['RandomFourierLossMinProb'] = 0.0 #
-TrainConf['RandomFourierLossMaxProb'] = 0.9 #
-TrainConf['RandomFourierLossProbSlope'] = 0.25e-4
+#Loss function scheduler
+TrainConf['LambdaProb'] = np.array([0.99 , 0.01 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 ])    #Lambda prob for stochastic annealing.
+#                                  MSE    KL   VAR   SKE   KUR   FOU   FAL   FCL  CRPS
+TrainConf['LambdaProbTrend'] = np.array([0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 ]) #Lambda prob trend for stochastic annealing
+#                                       MSE    KL   VAR   SKE   KUR   FOU   FAL   FCL  CRPS
+TrainConf['LambdaProbMax'] = np.array([1.0 , 1.0 , 1.0 , 1.0 , 1.0 , 1.0 , 1.0 , 1.0 , 1.0 ])    #Maximum lambda prob for stochastic annealing
+TrainConf['LambdaProbMin'] = np.array([0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 ])    #Minimum lambda prob for stochastic annealing
+#                                  MSE    KL   VAR   SKE   KUR   FOU    FAL   FCL   CRPS
+TrainConf['LambdaVal'] = np.array([1.0 , 1.0 , 1.0 , 1.0 , 1.0 , 0.0 , 1.0 , 1.0 , 1.0 ])
+#                                  MSE    KL   VAR   SKE   KUR   FOU  FAL   FCL  CRPS
+TrainConf['LambdaMinEpoch'] = np.array([ 0 , 20 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ])
+TrainConf['LambdaMaxEpoch'] = None
+TrainConf['LossName']  = np.array(['MSE','KL','VAR','SKE','KUR','FOU','FAL','FCL','CRPS'])
+TrainConf['StochAnn']  = True   #Weather we activate the stochastic annealing.
 
+TrainConf['FreeBits']           = 0.5    #Number of free bits for KL loss term.
+TrainConf['WeigthedLossFlag']   = False  #[bool] Wether to use a weighted MSE loss or not.
+TrainConf['CRPSNumSamples']     = 10
 
 #Parametros de configuracion que dependen del modelo a utilizar.
 TrainConf['ModelConf']=dict()
-TrainConf['ModelConf']['LatentDim']      =  32           #Latent space dimension.
-TrainConf['ModelConf']['HiddenDims']     =  [6, 12, 24 , 24]  #Number of channels for each convolutional layer.
+TrainConf['ModelConf']['LatentDim']      =  16           #Latent space dimension.
+TrainConf['ModelConf']['HiddenDims']     =  [12,24,48]  #Number of channels for each convolutional layer.
 TrainConf['ModelConf']['InputChannels']  = 1              #
 TrainConf['ModelConf']['OutputChannels'] = 1              #
 TrainConf['ModelConf']['BatchNorm']      = True           #
-TrainConf['ModelConf']['SkipConnections'] = [None,None,None,None]       # 1 means activate skip connection, None means turn it off. Last element correspond to the highest level in the UNET
+TrainConf['ModelConf']['SkipConnections'] = [1.0,1.0,None]       # 1 means activate skip connection, None means turn it off. Last element correspond to the highest level in the UNET
 
 OutPath = "../experiments/"+ TrainConf['ExpName'] +"_"+str(TrainConf['ExpNumber'])+"/"
 print(OutPath)
 if not os.path.exists( OutPath ):
-       # Creo un nuevo directorio si no existe (para guardar las imagenes y datos)
-       os.makedirs( OutPath )
+   # Creo un nuevo directorio si no existe (para guardar las imagenes y datos)
+   os.makedirs( OutPath )
 
 #Inicializamos los generadores de pseudo random numbers
 torch.manual_seed(TrainConf['RandomSeed'])
@@ -102,32 +105,30 @@ print(f"Total parameters: {sum(p.numel() for p in my_model.parameters()):,}")
     
 
 # Train the model
-thistory , best_loss = vunet.train_vae_model(
+vunet.train_vae_model(
     my_model,
     TrainDataLoader,
     val_loader=ValDataLoader,
     epochs=TrainConf['MaxEpochs'],
     learning_rate=TrainConf['LearningRate'],
     device='cuda',
-    max_lambda_kl=TrainConf['LambdaKL'],
     free_bits=TrainConf['FreeBits'],
-    lambda_mse=TrainConf['LambdaMSE'],
-    lambda_var=TrainConf['LambdaVar'],
-    lambda_skew=TrainConf['LambdaSkew'],
-    lambda_kurt=TrainConf['LambdaKurt'],
-    lambda_fourier=TrainConf['LambdaFourier'],
-    lambda_random_fourier=TrainConf['LambdaRandomFourier'],
-    weigthed_loss_flag=TrainConf['WeigthedLossFlag'],
-    fourier_loss_flag=TrainConf['FourierLossFlag'],
-    random_fourier_loss_flag=TrainConf['RandomFourierLossFlag'],
-    random_fourier_loss_max_prob = TrainConf['RandomFourierLossMaxProb'],
-    random_fourier_loss_min_prob = TrainConf['RandomFourierLossMinProb'],
-    random_fourier_loss_prob_slope = TrainConf['RandomFourierLossProbSlope'],
+    weighted_loss_flag=TrainConf['WeigthedLossFlag'],
     use_lr_scheduler=True,
     early_stopping_patience=TrainConf['MaxEpochs'],
     grad_clip=1.0,
     save_best=True,
-    checkpoint_dir = OutPath
+    checkpoint_dir = OutPath ,
+    LambdaProb = TrainConf['LambdaProb'] , 
+    LambdaProbMax = TrainConf['LambdaProbMax'] ,
+    LambdaProbMin = TrainConf['LambdaProbMin'] ,
+    LambdaProbTrend = TrainConf['LambdaProbTrend'] ,
+    LambdaVal       = TrainConf['LambdaVal'] ,
+    LambdaMinEpoch  = TrainConf['LambdaMinEpoch'] ,
+    LambdaMaxEpoch  = TrainConf['LambdaMaxEpoch'] ,
+    StochAnn        = TrainConf['StochAnn'] ,
+    LossName        = TrainConf['LossName'] ,
+    CRPSNumSamples  = TrainConf['CRPSNumSamples']
 )
 # Save the final model
 torch.save(my_model.state_dict(), OutPath + 'final_model.pth')
@@ -138,7 +139,7 @@ with open(OutPath + 'train_config.pkl', 'wb') as f:
 print("Training configuration saved.")
 
 # Plot training history
-vunet.plot_training_history(thistory, save_path=OutPath + '/training_history.png')
+#vunet.plot_training_history(thistory, save_path=OutPath + '/training_history.png')
 
 vunet.test_random_cases(my_model, TrainDataLoader, num_cases=10, device='cuda',outpath=OutPath)
 

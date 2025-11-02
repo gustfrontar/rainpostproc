@@ -44,7 +44,7 @@ TrainConf['LambdaVal'] = np.array([1.0 , 1.0 , 1.0 , 1.0 , 1.0 , 0.0 , 1.0 , 1.0
 #                                  MSE    KL   VAR   SKE   KUR   FOU  FAL   FCL  CRPS
 TrainConf['LambdaMinEpoch'] = np.array([ 0 , 20 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ])
 TrainConf['LambdaMaxEpoch'] = None
-TrainConf['LossName']  = np.array(['MSE','KL','VAR','SKE','KUR','FOU','FAL','FCL','CRPS'])
+TrainConf['LossName']  = np.array(['MSE','KL','VAR','SKE','KUR','FOU','FAL','FCM','CRPS'])
 TrainConf['StochAnn']  = True   #Weather we activate the stochastic annealing.
 
 TrainConf['FreeBits']           = 0.5    #Number of free bits for KL loss term.

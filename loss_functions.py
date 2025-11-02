@@ -455,7 +455,7 @@ def get_loss_list( LossName , device  ) :
             loss_list.append( loss_Fourier().to(device) )
         if my_loss == 'FAL' :
             loss_list.append( loss_FAL().to(device) )
-        if my_loss == 'FCL' :
+        if my_loss == 'FCM' :
             loss_list.append( loss_FCM().to(device) )
         if my_loss == 'CRPS' :
             loss_list.append( loss_CRPS().to(device) )
@@ -481,7 +481,7 @@ def compute_loss( loss_list , output , target , LossName , loss_weight , output_
            loss_vec[ii] = loss_list[ii]( output , target )* loss_weight[ii]
         if my_loss == 'FAL' and loss_weight[ii] > 0 :
            loss_vec[ii] = loss_list[ii]( output , target )* loss_weight[ii]
-        if my_loss == 'FCL' and loss_weight[ii] > 0 :
+        if my_loss == 'FCM' and loss_weight[ii] > 0 :
            loss_vec[ii] = loss_list[ii]( output , target )* loss_weight[ii]
         if my_loss == 'CRPS' and loss_weight[ii] > 0 :
            loss_vec[ii] = loss_list[ii]( output_samples , target )* loss_weight[ii]

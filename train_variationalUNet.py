@@ -33,7 +33,7 @@ TrainConf['ValRatio']       =  0.1
 TrainConf['TestRatio']      =  0.1
 TrainConf['DateFileName']   =  'files'
 #Loss function scheduler
-TrainConf['LambdaProb'] = np.array([0.99 , 0.01 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 ])    #Lambda prob for stochastic annealing.
+TrainConf['LambdaProb'] = np.array([0.98 , 0.01 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.01 ])    #Lambda prob for stochastic annealing.
 #                                  MSE    KL   VAR   SKE   KUR   FOU   FAL   FCL  CRPS
 TrainConf['LambdaProbTrend'] = np.array([0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 ]) #Lambda prob trend for stochastic annealing
 #                                       MSE    KL   VAR   SKE   KUR   FOU   FAL   FCL  CRPS
@@ -42,7 +42,7 @@ TrainConf['LambdaProbMin'] = np.array([0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 ,
 #                                  MSE    KL   VAR   SKE   KUR   FOU    FAL   FCL   CRPS
 TrainConf['LambdaVal'] = np.array([1.0 , 1.0 , 1.0 , 1.0 , 1.0 , 0.0 , 1.0 , 1.0 , 1.0 ])
 #                                  MSE    KL   VAR   SKE   KUR   FOU  FAL   FCL  CRPS
-TrainConf['LambdaMinEpoch'] = np.array([ 0 , 20 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ])
+TrainConf['LambdaMinEpoch'] = np.array([ 0 , 20 , 0 , 0 , 0 , 0 , 0 , 0 , 20 ])
 TrainConf['LambdaMaxEpoch'] = None
 TrainConf['LossName']  = np.array(['MSE','KL','VAR','SKE','KUR','FOU','FAL','FCM','CRPS'])
 TrainConf['StochAnn']  = True   #Weather we activate the stochastic annealing.
